@@ -1,0 +1,426 @@
+% ==============================================================================
+%  $RCSfile: project.tex,v $, $Revision: 1.38 $
+%  $Date: 2003-04-21 19:52:59 $
+%  $Author: schwiemn $
+%
+%  Description:
+%
+%  Last-Ispelled-Revision: 1.1
+%
+% ==============================================================================
+
+
+%===================
+\section {Persistenz der Projekte}
+\index{Persistenz} \index{Projekte}
+\label{Project Persistenz der Projekte}
+
+GIANT verwaltet persistente Informationen in sogenannten Projekten.
+Ein Projekt fasst alle Arbeitsergebnisse, die der Benutzer mittels
+GIANT für einen IML-Graphen erzeugen kann, wie z.B. Anzeigefenster und
+IML-Teilgraphen, logisch zusammen.
+\\Wichtige Vorrausetzungen:
+\begin {enumerate}
+
+  \item
+  Die gesamte in dieser Spezifikation beschriebene Funktionalität, die
+  sich auf das Öffnen bestehender und das Erstellen neuer Projekte während
+  der Laufzeit von GIANT bezieht, kann nur implementiert werden, 
+  falls die Reflektion zur Bauhaus IML-Graph Bibliothek dies unterstützt.
+  Der Kunde muss hierzu in der Reflektion die Möglichkeit vorsehen, 
+  IML-Graphen zur Laufzeit laden und bereits geladene IML-Graphen zur
+  Laufzeit aus dem Speicher entfernen zu können.
+    
+  \item 
+  Zur sicheren Identifikation der IML-Graph Datei, 
+  die zu einem Projekt gehört, muss über die Reflektion eine eindeutige
+  Prüfsumme für jeden IML-Graphen berechnet werden können.
+
+\end {enumerate}
+
+Konventionen der Projektverwaltung:
+
+\begin {enumerate}
+
+  \item 
+  Wird während des Betriebs von GIANT ein neues Projekt angelegt, so erhält 
+  es automatisch eine Projektdatei.
+  
+  \item
+  Ein Projekt besteht aus einem Verweis auf eine IML-Graph-Datei, auf die sich
+  die gespeicherten Informationen beziehen, sowie aus den gespeicherten 
+  Informationen für IML-Teilgraphen, Anzeigefenster und Knoten-Annotationen.
+ 
+  \item
+  Der Name eines bereits angelegten Projektes kann mit den Mitteln von 
+  GIANT nicht geändert werden (außer dadurch, dass  man das Projekt unter 
+  neuem Namen neu speichert). 
+
+  \item
+  Der Benutzer kann beliebig viele Projekte anlegen.
+  
+  \item
+  In GIANT kann immer nur ein Projekt gleichzeitig geöffnet sein. 
+  
+  \item
+  Während der Arbeit mit GIANT kann ein vorhandenes Projekt 
+  geladen oder ein neues Projekt angelegt werden. 
+
+  \item \index{Projekte!manuelle Modifikation}
+  Ein nicht gerade in GIANT geöffnetes Projekt kann vom Benutzer 
+  beliebig modifiziert werden.
+  GIANT unterstützt dies durch den Einsatz von XML (incl. DTDs). 
+  Insbesondere kann der Benutzer die Projektdatei 
+  (siehe \ref{Project Die Projektdatei})
+  modifizieren und so dem Projekt z.B. neue Verwaltungsdateien 
+  (siehe \ref {Project Verwaltungsdatei für Knoten-Annotationen},
+         \ref {Project Verwaltungsdateien für Anzeigefenster} und
+         \ref {Project Verwaltungsdateien für IML-Teilgraphen}) hinzufügen
+  oder die zugehörige IML-Graph Datei ändern.\\
+  Das Fehlerverhalten von GIANT gegenüber Fehlern aufgrund manueller Änderungen
+  des Benutzers an einem Projekt (Editieren der Projektdatei und
+  Ändern der Verwaltungsdateien) ist undefiniert.
+
+  \item
+  Um Inkonsistenzen und Konflikte zu vermeiden sollten alle Dateien, die
+  zu einem Projekt gehören, im Projektverzeichnis liegen (GIANT
+  macht dies automatisch immer so). Man sollte
+  in die Projektdatei also manuell keine Referenzen auf Verwaltungsdateien
+  außerhalb der Projektverzeichnisses eintragen; verboten ist dies
+  allerdings nicht. Das Verhalten von GIANT im Fehlerfall bleibt aber 
+  diesbezüglich undefiniert.
+
+
+\end {enumerate}
+
+
+  \subsection {Überblick über die Struktur eines Projektes}
+
+  Dieser Abschnitt liefert einen kurzen Überblick über die Struktur 
+  eines Projektes.\\
+  Alle Dateien, die zu einem Projekt gehören, werden
+  von GIANT im selben Verzeichnis -- dem Projektverzeichnis --
+  abgelegt.
+  Jedes Projekt besteht aus den folgenden Dateien:
+
+  \begin {enumerate}  
+
+     \item Genau einer Projektdatei (siehe \ref{Project Die Projektdatei}).
+  
+     \item Verwaltungsdateien für Anzeigefenster. \\
+           Jedes zum Projekt 
+           gehörende Anzeigefenster hat -- sobald es zum ersten
+           mal gespeichert wurde 
+           (siehe UseCase \ref{Anzeigefenster speichern}) --
+           seine eigene Verwaltungsdatei. 
+           Siehe hierzu auch  
+           \ref {Project Verwaltungsdateien für Anzeigefenster}.
+
+     \item Verwaltungsdateien für IML-Teilgraphen. \\
+           Jeder IML-Teilgraph 
+           des Projektes hat seine eigene Verwaltungsdatei
+           (siehe \ref {Project Verwaltungsdateien für IML-Teilgraphen}).
+           Ein IML-Teilgraph verfügt nicht sofort nach seiner
+           Erstellung über eine Verwaltungsdatei; diese Datei wird
+           erst erzeugt, wenn das gesamte Projekt nach Erstellung des
+           IML-Teilgraphen gespeichert wird (siehe z.B. UseCase 
+           \ref{Projekt speichern}).
+
+     \item Genau einer Verwaltungsdatei für alle Knoten-Annotationen
+           (siehe \ref {Project Verwaltungsdatei für Knoten-Annotationen}).
+
+  \end {enumerate}
+
+
+  \subsection {Das Projektverzeichnis} \index{Projekte!Projektverzeichnis}
+  \label{Project Das Projektverzeichnis} 
+  \begin {enumerate}
+
+    \item  
+    GIANT speichert alle Verwaltungsdateien (siehe 
+    \ref {Project Verwaltungsdatei für Knoten-Annotationen},
+    \ref {Project Verwaltungsdateien für Anzeigefenster} und
+    \ref {Project Verwaltungsdateien für IML-Teilgraphen}) automatisch
+    im Projektverzeichnis.
+ 
+    \item
+    In einem Projektverzeichnis darf nur ein Projekt (insb. nur
+    eine Projektdatei) abgelegt werden.
+    
+  \end {enumerate}    
+
+
+  \subsection {Die Projektdatei} \index{Projekte!Projektdatei}
+  \label{Project Die Projektdatei} 
+  \begin {enumerate}
+
+    \item
+    Die Projektdatei liegt als XML-Datei vor.
+
+    \item
+    Die Projektdatei befindet sich im Projektverzeichnis und enthält 
+    Informationen, die zur Identifikation des zu einem Projekt gehörenden 
+    IML-Graphen nötig sind. 
+  
+    \item
+    Der Name der Projektdatei entspricht dem Namen des Projektes.
+
+    \item \index{Projektdatei!Referenzen}
+    Die Projektdatei enthält Referenzen zu allen Dateien, die Bestandteil
+    des Projektes sind (Verwaltungsdateien für IML-Teilgraphen und
+    Anzeigefenster, sowie die Verwaltungsdatei für Knoten-Annotationen).
+    Verwaltungsdateien, die zwar im Projektverzeichnis liegen, zu
+    denen aber keine Referenz in der Projektdatei existiert, gehören
+    nicht zum Projekt.
+
+    \item
+    Der Pfad zu der Datei, die den IML-Graphen enthält, ist in der 
+    Projektdatei gespeichert. 
+  \end {enumerate}
+  
+ 
+  \subsection {Prüfung der IML-Graph Datei} 
+  \index{IML-Graph Datei!Identifikation}
+  Beim Laden eines Projektes wird überprüft, 
+  ob die in der Projektdatei gespeicherte Prüfsumme
+  der Prüfsumme der zu ladenden IML-Graph Datei entspricht. 
+  Das Verhalten von GIANT für den Fall, dass eine IML-Graph Datei geladen 
+  wird, die zwar die passende Prüfsumme hat, aber nicht den IML-Graphen 
+  enthält, der dem Projekt eigentlich zu Grunde liegt, ist undefiniert.
+
+
+  \subsection {Verwaltungsdateien für Anzeigefenster}
+  \label {Project Verwaltungsdateien für Anzeigefenster}
+
+  \index{Projekte!Verwaltungsdateien für Anzeigefenster}
+  \index{Verwaltungsdateien}
+
+  \begin {enumerate}
+  
+    \item
+    Diese Datei ist eine Binärdatei.
+  
+    \item
+    Zu jedem Anzeigefenster gibt es eine Verwaltungsdatei. 
+    
+    \item
+    Diese Verwaltungsdatei enthält alle Informationen zur kompletten 
+    Rekonstruktion eines Anzeigefensters. Alle Informationen werden
+    in binärer Form gespeichert.
+ 
+  \end {enumerate}
+  Innerhalb dieser Verwaltungsdatei werden folgende Informationen gespeichert:
+ 
+  \begin {enumerate}
+ 
+    \item Der komplette Anzeigeinhalt 
+          (alle visualisierten Fenster-Knoten und Fenster-Kanten mit Position).
+    \item Der Zustand (Zoomstufe und Position) des sichtbaren Anzeigeinhaltes.
+    \item Alle Pins (gespeicherte Zustände des sichtbaren Anzeigeinhaltes).
+    \item Alle Selektionen des Anzeigefensters.
+    \item Der Zustand aller Selektionen 
+          (welche die aktuelle Selektion ist, sowie die Art der Hervorhebung).
+    \item Der Name des gewählten Visualisierungsstils (nicht aber
+          die genaue Definition des Stils; diese wird in XML-Dateien
+          vorgenommen -- siehe \ref{Config Visualisierungsstile}).
+ 
+  \end {enumerate}
+ 
+  Der Name des für das Anzeigefenster gewählten Visualisierungsstils wird zwar 
+  gespeichert, da die Visualisierungsstile aber völlig unabhängig von den 
+  Projekten über XML-Dateien (siehe 
+  \ref{Config Visualisierungsstile}) konfiguriert bzw. definiert werden, 
+  kann nicht garantiert werden, dass der gewünschte Stil beim Laden 
+  des Projektes auch wieder gefunden wird,
+  in diesem Fall wird dann ein \gq{Standard-Stil} verwendet.
+
+
+  \subsection {Verwaltungsdateien für IML-Teilgraphen}  
+  \label {Project Verwaltungsdateien für IML-Teilgraphen}
+
+  \index{Projekte!Verwaltungsdateien für IML-Teilgraphen}
+  \index{Verwaltungsdateien}
+
+  \begin {enumerate}
+  
+    \item
+    Diese Datei ist eine Binärdatei.
+
+    \item
+    Für jeden IML-Teilgraphen gibt es eine eigene Verwaltungsdatei.
+    
+    \item
+    Sämtliche erzeugten IML-Teilgraphen werden in Verwaltungsdateien in 
+    binärer Form gespeichert. 
+
+  \end{enumerate}
+  
+  
+  \subsection {Die Verwaltungsdatei für Knoten-Annotationen}
+  \label {Project Verwaltungsdatei für Knoten-Annotationen}
+
+  \index{Projekte!Verwaltungsdateien für Knoten-Annotationen}
+  \index{Verwaltungsdateien}
+  \index{Knoten-Annotationen}
+
+  \begin {enumerate}
+  
+   \item
+   Diese Datei liegt als XML Datei vor.
+
+   \item
+   Alle Knoten-Annotationen des Projektes werden in genau einer 
+   Verwaltungsdatei gespeichert.
+  
+  \end{enumerate}
+  
+
+ 
+ 
+%===================
+\section {Grundlegendes Verhalten von GIANT beim Speichern von Projekten} 
+\index{Projekte!Speichern von Projekten}  
+
+  \subsection{\gq{Alles Speichern}}\label{Alles Speichern}
+  Diese Funktionalität wird von entsprechenden UseCases genutzt. 
+  Hierbei werden alle Anzeigefenster, IML-Teilgraphen 
+  und Knoten-Annotationen in die Verwaltungsdateien geschrieben, 
+  wobei auch alle Änderungen an noch geöffneten Anzeigefenstern berücksichtigt 
+  werden; d.h. der aktuelle Zustand (z.B. die Position der Fenster-Knoten)
+  der offenen Anzeigefenster wird ohne explizite Rückfrage beim Benutzer
+  in die Verwaltungsdateien geschrieben.
+  Der Zustand der persistenten Informationen in den Verwaltungsdateien
+  entspricht nach Ausführung von \gq{Alles Speichern} exakt dem Zustand 
+  des innerhalb von GIANT geöffneten Projektes.
+
+  %===
+  \subsection {Persistenz von Anzeigefenstern}
+  \label{Persistenz!Anzeigefenster}
+  \index{Persistenz!Anzeigefenster}
+
+  \begin {enumerate}
+
+    \item 
+    Beim Speichern von Anzeigefenstern in Verwaltungsdateien werden
+    für jedes Anzeigefenster alle Informationen gespeichert, die nötig
+    sind um den Zustand des Anzeigefensters zu rekonstruieren, der
+    möglichst exakt dem Zustand bei der Speicherung des Anzeigefensters
+    entspricht. Insbesondere werden hierbei die folgenden Bestandteile
+    des Anzeigefensters gespeichert:
+  
+    Alle Selektionen und Pins des Anzeigefensters.
+
+    Der exakte Zustand jeder Selektion; d.h. ob und wie die
+    Selektion hervorgehoben ist, ob sie gefiltert ist und ob
+    sie den Status der aktuellen Selektion hat.
+
+    Die Position der Fenster-Knoten und Fenster-Kanten des 
+    Anzeigefensters.
+
+    \item  \index{Persistenz!Visualisierungsstile}
+    Für den gewählten Visualisierungsstil des Anzeigefensters wird
+    nur der Name gespeichert, da die Visualisierungsstile über
+    die Konfigurationsdateien beliebig editiert
+    und auch gelöscht werden können. Wird beim Laden eines
+    Anzeigefensters aus der Verwaltungsdatei kein Visualisierungsstil
+    gefunden, dessen Name dem gespeicherten entspricht, so
+    wird für das Anzeigefenster statt dessen ein 
+    Standard-Visualisierungsstil verwendet.
+      
+
+    \item
+    Sämtliche dem Projekt bekannten Anzeigefenster (alle Anzeigefenster zu 
+    denen es eine entsprechende Verwaltungsdatei gibt) werden in 
+    der Liste über die Anzeigefenster angezeigt.
+   
+    \item 
+    Zu jedem Anzeigefenster eines Projektes gibt es eine Verwaltungsdatei.
+    Bei neu erzeugten Anzeigefenstern wird diese Verwaltungsdatei beim
+    ersten Speichern angelegt.
+
+    \item
+    Wird ein geöffnetes Anzeigefenster geschlossen, 
+    so fragt GIANT nach, ob es eventuelle Änderungen speichern soll
+    oder nicht. Falls ja, werden eventuelle Änderungen in die für das 
+    Anzeigefenster vorhandene Verwaltungsdatei geschrieben, 
+    anderenfalls bleibt der Zustand des Anzeigefensters nach der letzten
+    Speicherung vorhanden (die zugehörige Verwaltungsdatei wird nicht 
+    verändert).
+
+    \item
+    Modifikationen (z.B. das Verschieben von Fenster-Knoten) 
+    auf einem Anzeigefenster werden nicht automatisch
+    nach deren Durchführung gespeichert (so kann notfalls ein
+    Rückgängig durchgeführt werden).
+
+  \end {enumerate}
+
+  %===
+  \subsection {Persistenz von IML-Teilgraphen}
+  \index{Persistenz!IML-Teilgraphen}
+
+  \begin {enumerate}
+
+    \item
+    Alle in einem Projekt bereits vorhandenen IML-Teilgraphen werden in einer 
+    entsprechenden Liste angezeigt.
+  
+    \item
+    Neu erzeugte IML-Teilgraphen und Änderungen an bestehenden 
+    IML-Teilgraphen können nur über \gq{Alles Speichern} (siehe oben) 
+    gespeichert werden.
+       
+    \item
+    Wird das Programm beendet, ohne das zuvor \gq{Alles Speichern} ausgeführt 
+    worden ist, so gehen alle nicht gespeicherten Informationen zu den 
+    IML-Teilgraphen verloren (alle zwischenzeitlich ausgeführten Modifikationen 
+    und alle zwischenzeitlich neu erzeugten IML-Teilgraphen). 
+    Der Zustand nach dem letzten Speichern bleibt dann erhalten.
+
+    \item
+    Modifikationen an bestehenden IML-Teilgraphen werden nicht automatisch 
+    gespeichert. Zu neu erzeugten IML-Teilgraphen wird nicht automatisch
+    eine Verwaltungsdatei erzeugt.
+  
+    \item
+    IML-Teilgraphen können gelöscht werden. Falls vorhanden, wird dann auch
+    die entsprechende Verwaltungsdatei ebenfalls sofort gelöscht.
+  \end {enumerate}
+  
+  
+  
+\subsection {Persistenz von Knoten-Annotationen}  
+\label{Project Persistenz von Knoten-Annotationen} 
+\index{Persistenz!Knoten-Annotationen}
+\index{Knoten-Annotationen}
+
+Hier wird beschrieben, wie Knoten-Annotationen von GIANT persistent
+verwaltet werden.
+
+  \begin {enumerate}
+  
+   \item
+   Änderungen bestehender oder neu erzeugte Knoten-Annotationen werden nur
+   über die Funktionalität \gq{Alles Speichern} (siehe 
+   \ref{Alles Speichern}) in die 
+   Verwaltungsdatei für Knoten-Annotationen (siehe   
+   \ref {Project Verwaltungsdatei für Knoten-Annotationen}) geschrieben.
+   
+ \item Einmal erzeugte Knoten-Annotationen werden jedem IML-Knoten mit
+   der entsprechenden ID zugeordnet, unabhängig davon in welchem
+   Anzeigefenster diese visualisiert sind. Ein Knoten kann auch
+   annotiert sein, wenn er in keinem Anzeigefenster visualisiert ist. 
+   Wird ein annotierter Knoten gelöscht (aus einem Anzeigefenster
+   entfernt), so wird der dazu vorhandene Eintrag für die Annotation
+   in der Verwaltungsdatei nicht automatisch mit gelöscht.
+   
+ \end {enumerate}
+  
+  
+  
+  
+  
+  
+  
+  
+  

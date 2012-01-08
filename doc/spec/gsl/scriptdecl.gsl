@@ -1,0 +1,11 @@
+// Beispiel zur Script-Deklaration
+// Zwischen den geschweiften Klammern
+// Steht die Parameterliste und
+// der Rumpf
+
+{ (+param1, +param2)  // Parameterliste
+  [                   // Rumpf, hier: Sequence
+    action1;
+    action2;
+  ]                   // Ende der Sequence
+}

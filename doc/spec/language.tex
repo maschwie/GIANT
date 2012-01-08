@@ -1,0 +1,78 @@
+% =============================================================================
+%  $RCSfile: language.tex,v $, $Revision: 1.10 $
+%  $Date: 2003-04-22 11:45:19 $
+%  $Author: schwiemn $
+%
+%  Description:
+%
+%  Last-Ispelled-Revision: 1.1
+%
+% =============================================================================
+
+\section{GQSL}
+
+In der Version 1.0 dieses Dokuments wurde die Sprache GIANT Query and
+Skripting Language (GQSL) spezifiziert. Diese Sprache bot die selbe
+Funktionalität wie die hier beschriebene GSL. In dem Kundenreview am
+14. und 15. April 2003
+lehnte der Kunde GQSL jedoch ab, weil GQSL für Erweiterungen des Kunden einen
+zu hohen Anpassungsaufwand erfordere.
+
+Deshalb wird stattdessen die GIANT Scripting Language (GSL) durch die \company
+nach den präzisierten Wünschen des Kunden entwickelt.
+GSL wird die selbe Funktionalität bieten wie ihr Vorgänger GQSL, wird jedoch
+auf einer vom Kunden angeregten, deutlich vereinfachten Syntax basieren.
+
+Das Kapitel über GQSL wurde aus dieser Spezifikation entfernt. GSL wird in
+einem externen Dokument spezifiziert.
+
+\section{GSL Beschreibung}
+\index{GSL!Beschreibung}
+
+GSL Scripts werden von einem GSL Interpreter ausgeführt. Der GSL Interpreter
+ist Bestandteil von GIANT.
+
+Die GSL dient dazu, IML-Teilgraphen und
+Selektionen aus einem IML-Graph anzufragen und auf diesen Aktionen
+auszuführen. Aktionen sind:
+\begin{enumerate}
+\item Erzeugen eines neuen Anzeigefensters
+\item Hinzufügen der Graph-Knoten und Graph-Kanten eines IML-Teilgraphen
+in ein geöffnetes Anzeigefenster mit konfigurierbarem Layout der neuen
+Graph-Knoten.
+\item Entfernen bestimmter Fenster-Knoten und Fenster-Kanten aus einem
+Anzeigefenster
+\item Erzeugen einer neuen Selektion in einem Anzeigefenster
+\item Ändern des Inhalts einer Selektion in einem Anzeigefenster
+\item Löschen einer Selektion in einem Anzeigefenster
+\item Erzeugen eines neuen IML-Teilgraphen
+\item Ändern des Inhalts eines IML-Teilgraphen
+\item Löschen eines IML-Teilgraphen
+\end{enumerate}
+
+Selektionen und IML-Teilgraphen sind in GSL in bestimmten Variablen direkt
+sichtbar. Durch Inspektionen an diese Variablen kann der Inhalt einer Selektion
+oder eines IML-Teilgraphen ermittelt werden. Durch eine Zuweisung an eine
+solche Variable kann der Inhalt verändert werden.
+
+In GSL können Vereinigung, Schnitt und Differenz von IML-Knoten- und
+IML-Kantenmengen dargestellt werden. Außerdem können durch Anfragen an die
+Reflektion gezielt bestimmte IML-Knoten oder IML-Kanten ausgewählt und
+als neue Menge in Variablen zwischengespeichert werden. Hierbei
+wird eine bestimmte Traversierungsstrategie für den IML-Graph vorgegeben.
+Ob ein dabei erreichter IML-Knoten oder eine IML-Kante in das Ergebnis
+aufgenommen wird, kann durch ein benutzerkonfiguriertes Prädikat entschieden
+werden.
+
+Ein solches Prädikat entscheidet für jeden IML-Knoten und jede IML-Kante ob
+er/sie gewählt werden soll oder nicht. Dafür stehen dem Benutzer die
+Möglichkeiten zur Verfügung:
+\begin{enumerate}
+\item Inspektion der Attribute eines IML-Knoten, Vergleich der ermittelten
+Werte mit GSL-Variablen oder Konstanten oder Test ob der Wert in der
+Sprache eines regulären Ausdrucks enthalten ist
+\item Abfrage der Knotenklasse eines IML-Knoten, Test ob diese Knotenklasse
+in einer bestimmten Klassenmenge enthalten ist
+\item Abfrage der Kantenklasse einer IML-Kante, Test ob diese Kantenklasse in
+einer bestimmten Klassenmenge enthalten ist
+\end{enumerate}

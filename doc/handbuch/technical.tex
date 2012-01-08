@@ -1,0 +1,78 @@
+% ==============================================================================
+%  $RCSfile: technical.tex,v $, $Revision: 1.6 $
+%  $Date: 2003-09-23 19:33:38 $
+%  $Author: birdy $
+%
+%  Description: Hier sind die Anforderungen an die Programmumgebung 
+%  spezifiziert. Dazu gehören die verwendete Hard- und Software, sowie
+%  Schnittstellen zu anderen Produkten.
+%
+%  Last-Ispelled-Revision:
+%
+% ==============================================================================
+
+\section{Software}
+
+\index{Anforderungen!an die Software}
+
+Zum Betrieb von GIANT wird folgende Hardware und Software benötigt:
+\begin{itemize}
+  \item Sun Solaris, Linux oder Windows Betriebssystem
+  \item Emacs oder vi Texteditor für die Anzeige vom Sourcecode
+  \item GTK 2.0 oder höher
+  \item GTKAda 2.2
+\end{itemize}
+
+
+\section{Hardware}
+
+\index{Anforderungen!an die Hardware}
+Das Programm läuft auf SPARC Workstations und x86 kompatiblen PCs.
+Im Folgenden sind die minimalen Hardwareanforderungen zur Arbeit mit kleinen 
+und mittleren Projekten beschrieben. 
+Bei großen Projekten ist ein Speicherausbau
+von 2 GB und mehr empfehlenswert.
+
+\subsection{Hardwareanforderungen SPARC}
+
+\begin{itemize}
+  \item UltraSPARC-II 300 MHz
+  \item 512 MB Hauptspeicher
+  \item 8 Bit Grafik mit einer min. Auflösung von 1024*786
+  \item Maus mit mindestens zwei Tasten
+\end{itemize}
+
+\subsection{Hardwareanforderungen x86}
+\begin{itemize}
+  \item Pentium III 600 MHz
+  \item 512 MB Hauptspeicher
+  \item 8 Bit Grafik mit einer min. Auflösung von 1024*786
+  \item Maus mit mindestens zwei Tasten
+\end{itemize}
+
+\section{Installation}
+
+Die Giant-Installation unter Linux geht folgendermaßen vonstatten:\\
+
+Zunächst muß das Installationsarchiv (welches sich im Userverzeichnis,
+z.B. /home/sysop befindet), entpackt werden. Bei der GIANT-Version
+1.1 ist das entpackte Distributions-Archiv ca. 450 MB groß.\\
+
+Entpacken des gzip-Archives:
+
+°cd /home/sysop°\\
+
+°gzip -d giant-1.1.0.tar.gz°\\
+
+Entpacken des darin befindlichen Tar-Archives:
+
+°tar xf giant-1.1.0.tar°\\
+
+Im nun existierenden Verzeichnis giant-1.1.0 kann
+GIANT mit ./giant gestartet werden.
+
+\section{Compilieren}
+
+GIANT kann durch Ausführen von °make° im Verzeichnis
+src compiliert werden.
+

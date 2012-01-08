@@ -1,0 +1,360 @@
+% ==============================================================================
+%  $RCSfile: subgraph.tex,v $, $Revision: 1.20 $
+%  $Date: 2003-04-21 01:13:31 $
+%  $Author: schwiemn $
+%
+%  Description: UseCases für IML-Teilgraphen
+%
+%  Last-Ispelled-Revision: 1.10
+%
+% ==============================================================================
+
+\begin{uc}[IML-Teilgraph graphisch hervorheben]
+      {UC: IML-Teilgraph graphisch hervorheben}
+\index{IML-Teilgraph!hervorheben}         
+Dieser UseCase dient zum Hervorheben von IML-Teilgraphen innerhalb von
+Anzeigefenstern (siehe auch \ref{vis Hervorheben von IML-Teilgraphen}).
+
+  \begin{precond}
+    \cond Es gibt mindestens einen IML-Teilgraphen.
+   
+  \end{precond}
+
+  \begin{postsuccess}
+    \cond 
+    Der IML-Teilgraph ist in jedem geöffneten Anzeigefenster entsprechend
+    hervorgehoben.
+      
+    \cond
+    Der IML-Teilgraph, welcher vorher mit der gleichen Farbe 
+    hervorgehoben war, ist nicht mehr hervorgehoben.
+ 
+    \cond
+    Fenster-Knoten und Fenster-Kanten, die als Graph-Knoten bzw. Graph-Kanten
+    Bestandteil eines hervorgehobenen IML-Teilgraphen sind, werden,
+    auch wenn sie erst nach der Hervorhebung des IML-Teilgraphen in ein
+    Anzeigefenster eingefügt werden, ebenfalls automatisch hervorgehoben.
+
+    
+  \end{postsuccess}
+ 
+  \begin{proc}    
+    \step[1]
+    Der Benutzer startet den UseCase über das Popup-Menü der 
+    Liste über die IML-Teilgraphen (siehe \ref{GUI Subgraph List})
+    durch Rechtsklick auf den gewünschten IML-Teilgraphen.
+    In dem Popup Menü (siehe \ref {Popup-Menü Subgraph List})
+    wählt er das Untermenü \gq {Highlight} und dort die gewünschte
+    Farbe aus.
+            
+    \step[2]
+    GIANT hebt den IML-Teilgraphen in allen geöffneten Anzeigefenstern
+    mit der ausgewählten Farbe hervor.
+    
+  \end{proc}
+
+
+\end{uc}
+
+
+
+% ==============================================================================
+\begin{uc}[Graphische Hervorhebung von IML-Teilgraphen aufheben]
+      {UC: Graphische Hervorhebung von IML-Teilgraphen aufheben}
+\index{IML-Teilgraph!Hervorhebung aufheben}  
+Mit diesem UseCase kann die graphische Hervorhebung von IML-Teilgraphen 
+aufgehoben werden.
+
+  \begin{precond}
+    \cond 
+    Es gibt mindestens einen hervorgehobenen IML-Teilgraphen.
+   
+  \end{precond}
+
+  \begin{postsuccess}
+    \cond 
+    Der IML-Teilgraph ist nicht mehr hervorgehoben.
+
+  \end{postsuccess}
+
+  
+  \begin{proc}    
+    \step[1]
+    Der Benutzer startet den UseCase durch Rechtsklick auf den
+    hervorgehobenen IML-Teilgraphen in der Liste über
+    die IML-Teilgraphen (siehe \ref{GUI Subgraph List})
+    In dem zugehörigen Popup-Menü (siehe \ref{Popup-Menü Subgraph List})
+    wählt er den Eintrag \gq{Unhighlight In All Windows}
+    aus.
+
+    \step[2]
+    GIANT setzt die Hervorhebung des IML-Teilgraphen zurück.
+    
+  \end{proc} 
+
+
+\end{uc}
+
+
+% ==============================================================================
+\begin{uc}[IML-Teilgraph aus einer Selektion erzeugen]
+  {UC: IML-Teilgraph aus einer Selektion erzeugen}
+  \index{IML-Teilgraph!aus Selektion erzeugen} 
+  
+  Leitet einen neuen IML-Teilgraphen aus einer Quell-Selektion ab
+  (siehe auch Abschnitt \ref{IML-Teilgraphen aus Selektion ableiten}).
+
+  \begin{precond}
+     \cond 
+     Es gibt mindestens ein geöffnetes Anzeigefenster mit 
+     mindestens einer Selektion.
+     
+   \end{precond}
+
+
+  \begin{postsuccess}
+    \cond 
+    Es wurde ein neuer IML-Teilgraph mit entsprechendem Namen erzeugt.
+    
+  \end{postsuccess}
+  
+  \begin{postfail}
+    \cond Das System bleibt im bisherigen Zustand.
+  \end{postfail}
+  
+  \begin{proc} 
+     
+    \step[1]
+    Der Benutzer führt einen Rechtsklick auf die Quell-Selektion in
+    der Selektionsauswahlliste (siehe \ref{Selektionsauswahlliste}) aus
+    und wählt im Popup-Menü den Eintrag 
+    \gq{Create New IML Subgraph from This Selection} aus.
+     
+    \step[2]
+    GIANT zeigt den allgemeinen Texteingabedialog (siehe \ref{DIALOG-WINDOW})
+    an.
+     
+    \step[3]
+    Der Benutzer gibt einen Namen für den neu zu erstellenden IML-Teilgraphen
+    ein und bestätigt mit OK (gültige Namen für IML-Teilgraphen sind 
+    unter Abschnitt \ref{afa Zulaessige Namen} spezifiziert).\\
+    Gibt der Benutzer hier keinen Namen ein, so vergibt GIANT automatisch 
+    einen Namen.
+     
+    \step[4]
+    GIANT erzeugt gemäß der unter Abschnitt \ref{IML-Teilgraphen aus 
+    Selektion ableiten}
+    beschriebenen Konvention eine neuen IML-Teilgraphen aus der 
+    Quell-Selektion.
+
+  \end{proc}
+  
+  \begin{aproc}
+    \astep{3} Der Benutzer bricht den UseCase mit Cancel ab.
+  \end{aproc}
+
+\end{uc}
+
+
+
+% ==============================================================================
+\begin{uc}[IML-Teilgraph kopieren] {UC: IML-Teilgraph kopieren}
+\index{IML-Teilgraph!kopieren}      
+ Kopiert einen Quell-IML-Teilgraphen in einen neuen IML-Teilgraphen.
+ Bestehende IML-Teilgraphen können nicht überschrieben werden.
+
+  \begin{precond}
+     
+     \cond
+     Es gibt mindestens einen IML-Teilgraphen.
+     
+   \end{precond}
+
+
+  \begin{postsuccess}
+    \cond 
+    Es wurde ein neuer IML-Teilgraph mit entsprechendem Namen erzeugt.
+    
+    \cond
+    Der neue IML-Teilgraph hat alle Graph-Knoten und Graph-Kanten des
+    Quell-IML-Teilgraphen.
+    
+  \end{postsuccess}
+  
+  \begin{postfail}
+    \cond Das System bleibt im bisherigen Zustand.
+  \end{postfail}
+  
+  \begin{proc} 
+     
+    \step[1]
+    Der Benutzer führt einen Rechtsklick auf den zu kopierenden 
+    Quell-IML-Teilgraphen in der Liste über die IML-Teilgraphen
+    im Hauptfenster aus (siehe \ref{GUI Subgraph List}) und
+    wählt im zugehörigen Popup-Menü (siehe \ref{SUBGRAPH-LIST-POPUP}) 
+    den Eintrag \gq{Copy IML Subgraph} aus.
+     
+    \step[2]
+    GIANT zeigt den allgemeinen Texteingabedialog (siehe \ref{DIALOG-WINDOW}).
+            
+    \step[3]
+    Der Benutzer gibt einen Namen für den neu zu erstellenden IML-Teilgraphen
+    ein und bestätigt mit OK 
+    (gültige Namen siehe \ref{afa Zulaessige Namen}).\\
+    Gibt der Benutzer hier keinen Namen ein, so vergibt GIANT automatisch 
+    einen Namen.\\
+    Gibt der Benutzer den Namen eines bereits vorhandenen IML-Teilgraphen
+    ein, so erscheint eine Fehlermeldung.
+       
+    \step[4]
+    GIANT kopiert den Quell-IML-Teilgraphen in einen neuen Teilgraphen.
+
+  \end{proc}
+  
+  \begin{aproc}
+    \astep{3} Der Benutzer bricht den UseCase mit Cancel ab.
+  \end{aproc}
+
+\end{uc}
+
+
+
+% ==============================================================================
+\begin{uc}[IML-Teilgraph löschen]{UC: IML-Teilgraph löschen}
+\index{IML-Teilgraph!löschen}
+Dieser UseCase löscht einen IML-Teilgraphen. Die zugehörigen
+Fenster-Knoten und Fenster-Kanten in den Anzeigefenstern bleiben
+davon unberührt.
+
+  \begin{precond}
+     
+     \cond
+     Es gibt mindestens einen IML-Teilgraphen.
+     
+   \end{precond}
+
+
+  \begin{postsuccess}
+    \cond 
+    Der IML-Teilgraph wurde aus der Liste über die IML-Teilgraphen
+    gelöscht (siehe \ref{GUI Subgraph List}).
+    
+    \cond
+    War der gelöschte IML-Teilgraph hervorgehoben, so ist die
+    Hervorhebung der zugehörigen Fenster-Knoten und Fenster-Kanten
+    in allen Anzeigefenstern aufgehoben.
+
+  \end{postsuccess}
+  
+
+  
+  \begin{proc} 
+     
+    \step[1]
+    Der Benutzer führt einen Rechtsklick auf den zu löschenden
+    IML-Teilgraphen aus und wählt im Popup-Menü der
+    Liste über die IML-Teilgraphen den Eintrag 
+    \gq{Delete IML Subgraph} aus (siehe \ref {Popup-Menü Subgraph List}).
+      
+    \step[2]
+    GIANT löscht den gewählten IML-Teilgraphen.
+
+  \end{proc}
+
+\end{uc}
+
+
+% ==============================================================================
+\begin{uc}[Mengenoperationen auf 2 IML-Teilgraphen]
+      {UC: Mengenoperationen auf 2 IML-Teilgraphen}
+\index{IML-Teilgraph!Mengenoperationen}
+
+Ergänzend zu den Möglichkeiten der Anfragesprache 
+(siehe Kapitel \ref{GIANT Scripting Language}) kann der Benutzer
+die gängigen Mengenoperationen, wie Mengenvereinigung, 
+Schnitt und Differenz, auch direkt über einen Dialog 
+ausführen.
+Für eine genaue Beschreibung des Dialoges siehe auch
+Abschnitt \ref{Common-Set-Operation-Dialog}.
+Das Vorgehen innerhalb dieses UseCases ist im Wesentlichen 
+analog zu dem UseCase \ref{Mengenoperationen auf 2 Selektionen}.
+
+
+  \begin{precond}
+    \cond Es gibt mindestens zwei IML-Teilgraphen.
+  \end{precond}
+
+  \begin{postsuccess}
+    \cond 
+    Eine neuer IML-Teilgraph mit entsprechendem Namen 
+    (im Dialog eingegeben unter TARGET) ist angelegt 
+    und erscheint in der Liste über alle IML-Teilgraphen des Projektes
+    (siehe \ref{GUI Subgraph List}).
+       
+    \cond
+    Im Falle einer Mengenvereinigung umfasst
+    der neue IML-Teilgraph TARGET alle
+    Graph-Knoten und Graph-Kanten aus dem LEFT\_SOURCE IML-Teilgraphen und dem 
+    RIGHT\_SOURCE IML-Teilgraphen.
+    
+    \cond
+    Im Falle einer Mengendifferenz umfasst der neue IML-Teilgraph TARGET alle
+    Graph-Knoten und Graph-Kanten aus dem LEFT\_SOURCE IML-Teilgraphen, 
+    die nicht 
+    Bestandteil des RIGHT\_SOURCE IML-Teilgraphen sind.\\
+
+    \cond
+    Im Falle eines Mengenschnitts umfasst der neue IML-Teilgraph TARGET alle
+    Graph-Knoten und Graph-Kanten, 
+    die sowohl dem LEFT\_SOURCE IML-Teilgraphen als auch 
+    dem RIGHT\_SOURCE IML-Teilgraphen angehören.
+
+    \cond
+    Hätte der IML-Teilgraph TARGET nach der Mengenoperation Graph-Kanten 
+    ohne zugehörigen Start- und Zielknoten, so
+    sind diese Graph-Kanten aus dem IML-Teilgraphen TARGET entfernt worden
+    (dieser Fall kann bei Mengenschnitt und Mengendifferenz eintreten).
+
+  \end{postsuccess}
+
+  \begin{postfail}
+    \cond Das System bleibt im bisherigen Zustand.
+  \end{postfail}
+  
+  \begin{proc}    
+    \step[1]
+    Der Benutzer startet den UseCase über das Popup-Menü 
+    der Liste über die IML-Teilgraphen  
+    (siehe \ref {Popup-Menü Subgraph List}) indem er
+    einen Rechtsklick innerhalb der Liste ausführt und  
+    im Popup Menü den Eintrag \gq{IML Subgraph Set Operation}
+    auswählt.
+    
+    \step[2] 
+    GIANT öffnet den Set-Operation-Dialog 
+    (siehe \ref{Common-Set-Operation-Dialog}).
+    
+    
+    \step[3] 
+    Der Benutzer wählt dort die beiden Quell-IML-Teilgraphen 
+    (LEFT\_SOURCE und RIGHT\_SOURCE) aus, bestimmt die auszuführende
+    Mengenoperation und gibt unter TARGET den Namen 
+    des neu zu erzeugenden IML-Teilgraphen ein (gültige
+    Namen für IML-Teilgraphen siehe \ref{afa Zulaessige Namen}).\\
+    Er bestätigt mit OK.\\
+    Existiert bereits ein IML-Teilgraph mit dem unter TARGET eingegebenen 
+    Namen, so erscheint eine Fehlermeldung.
+       
+    \step[4]
+    GIANT führt die Mengenoperation aus und erzeugt den neuen
+    IML-Teilgraphen.
+  
+  \end{proc}
+
+  \begin{aproc}
+    \astep{3} Der Benutzer bricht die Eingabe der Daten mit Cancel ab.
+  \end{aproc}
+
+
+\end{uc}
+

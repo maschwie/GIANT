@@ -1,0 +1,13 @@
+<!ELEMENT giant_config_file (absolute_path_root?, (setting)*)>
+
+  <!ELEMENT absolute_path_root EMPTY>
+  <!ATTLIST absolute_path_root
+    root_directory  CDATA #REQUIRED
+  >
+
+  <!ELEMENT setting EMPTY>
+  <!ATTLIST setting
+    name   CDATA #REQUIRED
+    value  CDATA #REQUIRED
+  >
+    
