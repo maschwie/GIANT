@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+
+  <document>
+
+	<properties>
+	  <title>Features</title>
+	</properties>
+
+	<body>
+
+	  <section name="Features">
+
+        <p>
+          The <a
+          href="ftp://ftp.berlios.de/pub/giant/docs/spec.pdf">specification</a>
+          contains a detailed description of GIANT's
+          capabilities in German. See below for a list of the major features:
+  
+          <ul>
+            <li>Smooth navigation through large graphs (> 100,000
+            nodes)</li>
+            <li>Advanced edge selection</li>
+            <li>Extensible scripting language</li>
+            <li>Customizable menus through GSL scripts</li>
+            <li>Flexible and easy to replace reflection interface for
+            graph reading</li>
+            <li>Interruptable operations</li>
+            <li>Available for Linux, Solaris and Windows</li>
+          </ul>
+        </p>
+
+	  </section>
+
+	  <section name="Requirements">
+
+        <p>
+          The binary distribution of GIANT should work on most
+          machines. The Linux version was compiled on a Debian
+          GNU/Linux system. Please make sure you have GtkAda 2.2.0
+          installed if using the dynamically linked version.
+        </p>
+
+     </section>
+
+	</body>
+  </document>
+  

@@ -1,0 +1,41 @@
+//
+//
+//
+
+set (+all_instances_of,
+{ 
+  (+instance)
+  [
+    set (+add_node,
+    {
+      ()
+      [
+        add ('v1, n);
+      ]
+    });
+
+    set (+all_instances_of_loop,
+    {
+      ()
+      [
+        set ('n, get_first (v2));
+        if (instance_of (n, instance), add_node, null);
+        sub ('v2, n);
+        if (less (size_of ('v2), 1), false, true);
+      ]
+    });
+
+    // local variables
+    +n;
+    +v1;
+    +v2;
+
+    // initialize the sets
+    set ('v1, empty_node_set());
+    set ('v2, all_nodes ());
+    loop (all_instances_of_loop);
+
+    // return the node set
+    v1;
+  ]
+})

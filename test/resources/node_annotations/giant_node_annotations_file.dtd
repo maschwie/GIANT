@@ -1,0 +1,6 @@
+<!ELEMENT giant_node_annotations_file (node_annotation)*>
+  <!ELEMENT node_annotation EMPTY>
+  <!ATTLIST node_annotation
+    node_id     CDATA  #REQUIRED
+    annotation  CDATA  #REQUIRED
+  >

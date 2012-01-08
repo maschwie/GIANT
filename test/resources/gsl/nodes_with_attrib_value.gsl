@@ -1,0 +1,44 @@
+//
+// the script in this file checks for all nodes in a node set wether 
+// the value of a given attribute matches a regular expression
+//
+
+set (+nodes_with_attrib_value,
+{ 
+  (+nodes, +attrib_name, +attrib_value)
+  [
+    set (+add_node,
+    {
+      ()
+      [
+        add ('v1, n);
+      ]
+    });
+
+    set (+nodes_with_attribute_loop,
+    {
+      ()
+      [
+        set ('n, get_first (v2));
+        if (in_regexp (get_attribute (n, attrib_name), attrib_value), 
+            add_node,
+            null);
+        sub ('v2, n);
+        if (less (size_of ('v2), 1), false, true);
+      ]
+    });
+
+    // local variables
+    +n;
+    +v1;
+    +v2;
+
+    // initialize the sets
+    set ('v1, empty_node_set());
+    set ('v2, nodes);
+    loop (nodes_with_attribute_loop);
+
+    // return the node set
+    v1;
+  ]
+})

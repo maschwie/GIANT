@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE giant_config_file 
+  SYSTEM "giant_config_file.dtd">
+
+<giant_config_file>
+
+  <absolute_path_root root_directory  = "." />
+ 
+  <!-- Some Free Config Settings -->
+  <setting name="Reiche_Ente" value="Dagobert Duck" />
+  <setting name="Schlaue_Ente" value="Daniel Duesentrieb" />
+  <setting name="Arme_Ente" value="Donald Duck" />
+			
+  <!-- Required Config Settings -->  
+  
+  <setting name="Resources_Directory" value="." />
+  
+  <!-- Relative Paths in all config files are regarded as relative -->
+  <!-- towards the "Resources_Directory" if you change the standard -->
+  <!-- Resource dirctory in a user defined config file then -->
+  <!-- all relative paths in the standard config file of giant will -->
+  <!-- also be regarded as realtive towards this path -->
+  <setting name="Icon_For_Node_Annotations" value="./test_bild.xpm" />
+  
+  <setting name="Actual_Selection_Highlight_Color" value="RGB:AA/AA/AA" />
+					  
+  <setting name="Selection_Highlight_Color_1" value="RGB:AA/AA/AA" />
+  <setting name="Selection_Highlight_Color_2" value="RGB:AA/AA/AA"/>
+  <setting name="Selection_Highlight_Color_3" value="RGB:AA/AA/AA" />
+					  
+  <setting name="IML_Subgraph_Highlight_Color_1" value="RGB:AA/AA/AA" />
+  <setting name="IML_Subgraph_Highlight_Color_2" value="RGB:AA/AA/AA" />
+  <setting name="IML_Subgraph_Highlight_Color_3" value="RGB:AA/AA/AA" />  
+</giant_config_file>
+

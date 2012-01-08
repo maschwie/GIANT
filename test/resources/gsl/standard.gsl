@@ -1,0 +1,203 @@
+// ===========================================================================
+//  $RCSfile: standard.gsl,v $ $Revision: 1.1 $
+//  $Date: 2003-09-02 13:08:41 $
+//  $Author: schulzgt $
+//
+//  File:         GSL-Library standard.gsl
+//  Description:  Contains an GSL expression used to initialize the standard
+//                activation environment. Is to be executed only once at
+//                GSL Interpreter startup
+//  First Author: keulsn
+//  Status:       Initial
+//
+//
+// ===========================================================================
+
+[
+  // Logical Negation
+  set
+   (+not,
+    { (+a)
+      if
+       (a,
+        false,
+        true)
+    });
+
+  // Logical And
+  set
+   (+and_then,
+    { (+a, +b)
+      if
+       (a,
+        b,
+        false)
+    });
+
+  set
+   (+and,
+    { (+a, +b)
+      [
+        if
+         (is_script (a),
+          {() set ('a, a ())},
+          null);
+        if
+         (is_script (b),
+          {() set ('b, b ())},
+          null);
+        if 
+         (a,
+          {() b},
+          false);
+      ]
+    });
+
+  // Logisches Oder
+  set
+   (+or_else,
+    { (+a, +b)
+      if
+       (a,
+        true,
+        b)
+    });
+
+  set
+   (+or,
+    { (+a, +b)
+      [
+        if
+         (is_script (a),
+          {() set ('a, a ())},
+          null);
+        if
+         (is_script (b),
+          {() set ('b, b ())},
+          null);
+        if
+         (a,
+          true,
+          {() b});
+      ]
+    });
+
+  // Schleifen
+  set
+   (+while,
+    { (+b, +c)
+      if
+       (b,
+        {() loop ({() [c (); b ();]})},
+        null)
+    });
+
+  set
+   (+repeat,
+    { (+c, +until)
+      loop ({() [c (); until ();]})
+    });
+
+
+  // Sets
+  set
+   (+union, add);
+
+  set
+   (+intersection,
+    { (+A, +B)
+      [
+        +result;
+        if
+         (is_node_set (A),
+          {() set ('result, empty_node_set ())},
+          {() set ('result, empty_edge_set ())});
+        for_each
+         (A,
+          { (+e)
+            if
+             (is_in (B, e),
+              {() add ('result, e)},
+              null)
+          });
+        result;
+      ]
+    });
+
+  set
+   (+difference, sub);
+
+  // node sets
+  set
+   (+select_nodes,
+    { (+from, +node_predicate)
+      [
+        set
+          (+node_set, empty_node_set ());
+           for_each
+            (from,
+             { (+n)
+               if
+                (node_predicate (n),
+                 {() add ('node_set, n)},
+                 null)
+             });
+        node_set;
+      ]
+    });
+
+  set
+   (+build_nodes,
+    { (+edge_set, +node_predicate)
+      [
+        set
+         (+node_set, empty_node_set ());
+          for_each
+           (edge_set,
+            { (+e)
+              [
+                set
+                 (+n, get_source (e));
+                if
+                 (node_predicate (n),
+                  {() add ('node_set, n)},
+                  null);
+                set
+                 ('n, get_target (e));
+                if
+                 (node_predicate (n),
+                  {() add ('node_set, n)},
+                  null);
+              ]
+            });
+          node_set;
+      ]
+    });
+
+  set
+   (+for_each,
+    { (+a_set, +action)
+      [
+        set (+count, size_of ('a_set));
+         if
+          (less (count, 1),
+           null,
+           { ()
+             [
+               set (+copy, a_set);
+	       +item;
+               loop
+                ({ ()
+                   [
+                     set ('item, get_first (copy));
+                     action (item);
+                     sub ('copy, item);
+                     set ('count, sub (count, 1));
+                     less (0, count);
+                   ]
+                 });
+             ]
+           });
+      ]
+    })
+]

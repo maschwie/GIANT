@@ -1,0 +1,3 @@
+// $Id: Create\040Complete\040Subgraph.gsl,v 1.2 2003-10-09 15:28:31 koppor Exp $
+{ () set ('subgraph.Complete, (all_nodes(), all_edges ()))}
+

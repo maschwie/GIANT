@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE giant_vis_style_file
+  SYSTEM "giant_vis_style_file.dtd">
+
+<giant_vis_style_file>
+
+  <!-- ................................................................. -->
+  <global_settings
+    vis_window_background_color="RGB:20/20/20"/> 
+
+  <!-- ................................................................. -->
+  <default_node_setting
+    icon         = "test_node_icon_default_1.xpm"
+    text_color   = "black"
+    border_color = "black"
+    fill_color   = "white"> 
+     
+  </default_node_setting>
+   
+  
+  <node_class_specific_setting 
+    icon         = "test_node_icon_red_1.xpm"
+    text_color   = "red"
+    border_color = "red"
+    fill_color   = "white"> 
+    
+    <node_attribute attribute_name  = "Type_Size"/> 
+    <node_attribute attribute_name  = "SLoc"/> 
+                            
+    <node_class     node_class_name = "IML_Root"/> 
+    <node_class     node_class_name = "HPGNode"/> 
+    
+    <super_node_class super_node_class_name = "T_Node"/> 
+    <super_node_class super_node_class_name = "Prog_Unit"/>   
+    
+  </node_class_specific_setting>
+  
+                  
+  <!-- ................................................................. -->
+  <default_edge_setting
+    line_color = "RGB:00/FF/FF"     
+    text_color = "RGB:00/FF/FF"     
+    line_style = "dotted_line"      
+    show_label = "no" />  
+         
+  <edge_class_specific_setting
+    line_color = "green"
+    text_color = "green"
+    line_style = "dashed_line"
+    show_label = "yes"> 
+
+    <super_edge_class
+      super_start_node_class = "Prog_Unit"
+      attribute_name   = "Subunits" />   
+      
+    <super_edge_class
+      super_start_node_class = "Op"
+      attribute_name   = "*" /> 
+                             
+  </edge_class_specific_setting>          
+        
+</giant_vis_style_file>

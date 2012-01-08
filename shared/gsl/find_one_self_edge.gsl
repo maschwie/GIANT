@@ -1,0 +1,44 @@
+// GSL-expression find_one_self_edge
+//
+// First Author: Steffen Keul
+//
+// $Id: find_one_self_edge.gsl,v 1.1 2003-09-24 00:03:08 keulsn Exp $
+//
+// Expression to demonstrate implementation of
+// efficient iteration over large sets.
+//
+// Iterates over edges in the graph until it finds
+// the first loop. Then creates a subgraph "Self_Edge"
+// containing that loop and its incident node.
+//
+
+[
+  set (+edges, all_edges ());
+  set (+found, false);
+  +e; +n;
+  loop
+   ({ ()
+      [
+        set ('e, get_first ('edges));
+        sub ('edges, e);
+        set ('found, equal (get_source (e), get_target (e)));
+        if
+         (found,
+          { () [set ('n, get_source (e)); false;]},
+          { () less (0, size_of ('edges))});
+      ]
+    });
+  if
+   (found,
+    { ()
+      [
+        set (+nodes, empty_node_set ());
+        set ('edges, empty_edge_set ());
+        add ('nodes, n);
+        add ('edges, e);
+        set ('subgraph.Self_Edge, (nodes, edges));
+      ]
+    },
+    null);
+]
+

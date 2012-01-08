@@ -1,0 +1,34 @@
+{
+  (+node)
+  [
+    run ("for_each");
+    set (+nodes, empty_node_set ());
+    set (+edges, empty_edge_set ());
+    add ('nodes, node);
+    set (+add_edge, { (+e) add ('edges, e) });
+
+    for_each
+      (nodes,
+        {
+          (+n)
+          [
+            for_each
+              (get_incoming (n),
+               add_edge);
+            for_each
+              (get_outgoing (n),
+               add_edge);
+          ]});
+
+    for_each
+      (edges,
+        {
+          (+e)
+          [
+            add ('nodes, get_source (e));
+            add ('nodes, get_target (e));
+          ]});
+
+    set ('selection.Adjacent_Nodes, (nodes, edges));
+  ]
+}

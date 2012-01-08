@@ -1,0 +1,17 @@
+{
+   ()
+   [
+      run ("all_instances_of");
+      +nodes;
+      set ('nodes, all_instances_of ("HPGNode"));
+      set ('subgraph.hpg, (nodes, all_edges ()));
+      create_window ("HPG");
+      insert_into_window
+        ("HPG", 
+         "HPG", 
+         subgraph.hpg,
+         "tree",
+         "" );
+   ]
+}()
+
