@@ -1,0 +1,78 @@
+%% 
+%% sollte in allen Dokumenten included werden
+%%
+
+% packages
+\RequirePackage{parskip}                % Absaetze: ohne Einzuege, mit spacing 
+\RequirePackage[german]{babel} 
+\RequirePackage[latin1]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{textcomp}   
+\RequirePackage{eepic}
+\RequirePackage{url}                    % \url{} aktivieren
+\RequirePackage{fancyhdr}
+\RequirePackage{longtable}              % neue Tabelle, die laenger ist
+\RequirePackage{xspace}
+\RequirePackage{lastpage}
+%\RequirePackage{footnote}
+\RequirePackage{a4wide}
+\RequirePackage{times}                  % font
+
+%%% check whether we are running pdflatex
+%%% from http://www.db.informatik.uni-bremen.de/~mr/pdflatex.html
+\newif\ifpdf 
+\ifx\pdfoutput\undefined 
+\pdffalse % we are not running pdflatex 
+\else 
+\pdfoutput=1 % we are running pdflatex 
+\pdfcompresslevel=9     % compression level for text and image;
+\pdftrue 
+\fi
+
+\ifpdf
+  %see http://scgwiki.iam.unibe.ch:8080/SCG/47
+  \usepackage[pdftex,
+              colorlinks=true,
+              linkcolor=blue,
+              citecolor=blue,
+              urlcolor=blue,
+              bookmarks=true,
+              pdfstartview=FitV,
+              backref,
+              pagebackref]{hyperref}
+  \usepackage{thumbpdf}
+  \RequirePackage[pdftex]{graphicx}
+\else
+  \RequirePackage[dvips]{graphicx}
+\fi
+
+% error output
+% see http://groups.google.com/groups?hl=en&lr=&ie=UTF-8&threadm=ankmna%24f50nj%241%40ID-115117.news.dfncis.de&rnum=2&prev=/groups%3Fq%3DArgument%2Bof%2B%255C%2540fifthoffive%2Bhas%2Ban%2Bextra%2B%257D%26hl%3Den%26lr%3D%26ie%3DUTF-8%26selm%3Dankmna%24f50nj%241%2540ID-115117.news.dfncis.de%26rnum%3D2
+%\errorcontextlines
+\setcounter{errorcontextlines}{99} % any large enough number does
+
+% Euro symbol
+\newcommand\euro{{\sffamily C%
+  \makebox[0pt][l]{\kern-.70em\mbox{--}}%
+  \makebox[0pt][l]{\kern-.68em\raisebox{.25ex}{--}}}}
+
+% common commands
+\newcommand\company{CodeFabrik@Stuttgart\xspace}
+\newcommand\product{GIANT\xspace}
+
+\hyphenation{GIANT CodeFabrik Stuttgart}
+
+% makro for german quotation marks
+\newcommand{\gq}[1]{\glqq{}#1\grqq{}}
+
+\pagestyle{fancy}
+
+% header
+\lhead{\company}
+\chead{}
+\rhead{\today}
+
+% footer
+\lfoot{}
+\cfoot{}
+\rfoot{\thepage{} / \pageref{LastPage}}

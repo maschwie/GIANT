@@ -1,0 +1,124 @@
+% =============================================================================
+%  $RCSfile: non_functionals.tex,v $ 
+
+%  $Date: 2003-04-06 21:14:54 $
+
+%  $Author: squig $ 
+
+%
+%  Description: Non Functional Requirements für die Spezifikation
+
+% NICHT MEHR BESTANDTEIL DER SPEZ
+%
+% =============================================================================
+\section {Hardwareanforderungen}
+
+  \subsection {Hauptspeicher}
+Die Plattform, auf der der IML-Browser selbst ausgeführt werden soll,
+muss mindestens über 512 MB Hauptspeicher verfügen.
+
+  \subsection {Rechenleistung}
+Die Rechenleistung der Plattform auf der der IML-Browser selbst ausgeführt
+werden soll muss mindestens mit der eines Pentium II 
+(Taktfrequenz 200 MHz oder mehr) vergleichbar sein.
+
+  \subsection {Grafik}
+Die für die Anzeige genutzte Plattform (z.B. der Rechner auf dem der Window 
+Manager läuft)
+muss über eine Mindestauflösung von 1024*768 Pixeln 
+bei mindestens 8 Bit Farbtiefe verfügen
+
+
+\section {Anforderungen an die Entwicklung}
+
+  \subsection {Compiler und Bibliotheken}
+Das System soll in der Sprache Ada95 mit GNAT 3.14 entwickelt werden, 
+wobei GTK/ADA 1.2.12 als graphische GUI-Bibliothek eingesetzte werden soll.
+
+  \subsection {IML-Graph-Bibliothek}
+Das System baut auf der vom Kunden bereit gestellten IML-Graph-Bibliothek auf. 
+Auf den IML-Graphen selbst wird nur über die Reflektion zugegriffen werden.
+
+  \subsection {Robustheit gegenüber Änderungen der IML-Graph-Spezifikation}
+Das System soll so an Bauhaus angebunden werden, dass Änderungen in der Spezifikation 
+des IML-Graphen möglichst keine Wartungsarbeiten erfordern. 
+Besonders soll dies für die verschiedenen Attribute, Knoten- und Kantenklassen des 
+Bauhaus-IML-Graphen gelten, da diese sich oft ändern können.
+Die Klassen und Attribute der Bauhaus-IML-Graph Bibliothek werden hierzu durch 
+den IML-Browser nur so unterschieden, dass neu hinzukommende Attribute automatisch 
+mit erfasst und damit angezeigt werden können.
+Die Robustheit kann nur in soweit gewährleistet werden, wie es die von der Bauhaus
+Reenginieering GmbH gestellte Reflektion ermöglicht.
+
+  \subsection {Datenstrukturen des Kunden}
+Bei der Entwicklung sollen zur Unterstützung der Wartbarkeit möglichst auch die vom 
+Kunden zur Verfügung gestellten Datenstrukturen 
+(wie z.B. der AVL-Baum aus Bauhaus/reuse/src)
+genutzt werden.
+
+  \subsection {Plattformunabhängigkeit}
+Das Produkt soll ein hohes Maß an Plattformunabhängigkeit, wie sie sich aus der 
+eingesetzten Entwicklungsumgebung ergibt, 
+verfügen (also alle Systeme auf denen GTK/ADA 1.2.12 lauffähig ist). 
+Explizit während der Entwicklung getestet
+werden kann dies aber nur für Sun Solaris und Linux.
+
+
+  \subsection {Wartbarkeit}
+
+Das System soll sich durch ein hohes Maß an Wartbarkeit und Erweiterbarkeit 
+auszeichnen.
+Wartbarkeit und Erweiterbarkeit gehen hierbei über Performance. 
+Erreicht werden soll dies
+durch entsprechende Kapselung und Strukturierung des Entwurfes 
+(Informationhiding, hohe Lokalität,strikte Trennung von GUI und Funktionalität etc.).
+
+
+
+
+
+
+
+\section {Mengengerüst}
+
+  Ein explizites Mengengerüst, z.B. hinsichtlich der minimalen und maximalen Anzahl von 
+
+  darstellbaren Knoten, gibt es nicht. 
+
+
+
+
+
+  \subsection {Verfügbarer Hauptspeicher als einziges ``Mengengerüst''}
+
+Größenbeschränkungen (z.B. Größe der zu ladenden IML-Graph-Datei, 
+
+Anzahl Knoten in einem Anzeigefenster ...) 
+
+sollen sich alleine aus dem verfügbaren Arbeitsspeicher ergeben. Falls der verfügbare Arbeitsspeicher erschöpft ist, 
+
+soll das System nicht abstützen, sondern vielmehr die entsprechende Aktion kontrolliert abbrechen und dem Benutzer 
+
+ein Weiterarbeiten ermöglichen.
+
+
+
+
+
+  \section {Unterstützung paralleler Rechner}
+
+Layoutalgorithmen werden zur Unterstützung paralleler Rechner in separaten Threads ausgeführt. 
+
+Die einzelnen Layoutalgorithmen sind nicht parallel. In einem Anzeigefenster kann immer nur ein es können 
+
+aber mehrere Layoutalgorithmen in verschiedenen Anzeigefenstern gleichzeitig laufen.
+
+!!! Dieser Satz ist irghendwie komisch !!!! <<<<<<<<>>>>>>>
+
+
+
+
+
+
+
+

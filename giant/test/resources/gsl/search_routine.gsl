@@ -1,0 +1,13 @@
+{
+  ()
+  [
+    run ("nodes_with_type");
+    run ("nodes_with_attrib_value");
+    set (+nodes, nodes_with_type ("OC_Routine"));
+    set ('subgraph.OC, (nodes, empty_edge_set ()));
+    set (+name, input ("Enter routine name:"));
+    set ('nodes, nodes_with_attrib_value
+      (nodes, "Name", name));
+    set ('subgraph.R, (nodes, empty_edge_set ()));
+  ]
+}

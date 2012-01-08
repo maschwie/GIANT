@@ -1,0 +1,25 @@
+#rightcol 
+{
+  background: #fff;
+  border-left: 1px solid #aaa;
+  border-bottom: 1px solid #aaa;
+}
+
+#stats
+{
+  font-size: x-small;
+}
+
+#stats a:active, #stats a:hover, #stats a:visited 
+{
+  color: blue;
+}
+
+#banner, #banner td { 
+ vertical-align: middle;
+ background-image:url(../images/background.png);
+}
+
+#leftcol {
+ width: 180px;
+}

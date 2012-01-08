@@ -1,0 +1,12 @@
+{
+  ()
+  [
+    create_window ("Entire_Graph_Window");
+    insert_into_window
+      ("Entire_Graph_Window",
+       "Entire_Graph",
+       (all_nodes (), all_edges ()),
+       "matrix",
+       "");
+  ]
+}

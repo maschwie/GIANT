@@ -1,0 +1,5 @@
+<!ELEMENT giant_node_annotations_file (node_annotation)*>
+  <!ELEMENT node_annotation (#PCDATA)>
+  <!ATTLIST node_annotation
+      node_id  ID  #REQUIRED   
+  >

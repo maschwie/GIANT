@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE giant_vis_style_file
+  SYSTEM "giant_vis_style_file.dtd">
+
+<giant_vis_style_file>
+
+  <!-- ................................................................. -->
+  <global_settings
+    vis_window_background_color="RGB:20/20/20"/> 
+
+  <!-- ................................................................. -->
+  <default_node_setting
+    icon         = "test_node_icon_default_1.xpm"
+    text_color   = "RGB:AA/AA/A1"
+    border_color = "RGB:AA/AA/A2"
+    fill_color   = "RGB:AA/AA/A3"> 
+     
+    <node_attribute attribute_name = "SLoc"/>      
+  </default_node_setting>
+   
+   
+  <node_class_specific_setting 
+    icon         = "test_node_icon_blue_1.xpm"
+    text_color   = "blue"
+    border_color = "blue"
+    fill_color   = "white"> 
+    
+    <node_attribute attribute_name  = "SLoc"/>    
+     
+    <node_class     node_class_name = "IML_Root"/>
+    <node_class     node_class_name = "HPGNode"/>
+    <node_class     node_class_name = "OC_Parameter"/>        
+    <node_class     node_class_name = "TC_Boolean"/>
+  </node_class_specific_setting>
+  
+  
+  <node_class_specific_setting 
+    icon         = "test_node_icon_red_1.xpm"
+    text_color   = "red"
+    border_color = "red"
+    fill_color   = "white"> 
+    
+    <node_attribute attribute_name  = "SLoc"/>    
+    <node_attribute attribute_name  = "Type_Size"/>   
+         
+    <node_class     node_class_name = "TC_Boolean"/>      
+  </node_class_specific_setting>
+      
+      
+      
+
+  <!-- ................................................................. -->
+  <default_edge_setting
+    line_color = "green"     
+    text_color = "green"     
+    line_style = "continuous_line"      
+    show_label = "yes" />  
+      
+</giant_vis_style_file>

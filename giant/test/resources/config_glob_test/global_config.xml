@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE giant_config_file 
+  SYSTEM "giant_config_file.dtd">
+
+<giant_config_file>
+
+  <absolute_path_root 
+   root_directory  = "./resources/config_glob_test/annotation_dir" />
+  
+  <setting name="Icon_For_Node_Annotations" 
+           value="./annotation_dir/document.xpm" />
+           
+  <setting name="Icon_relative_to_aps_path_root" 
+           value="./document.xpm" />
+           
+  <setting name="Icon_should_not_be_found" 
+           value="./resources/config_glob_test/annotation_dir/document.xpm" />
+  
+</giant_config_file>

@@ -1,0 +1,8 @@
+{
+  (+node)
+  [
+     node;
+     set (+name, get_attribute (node, "Name"));
+     error (name);
+  ]
+}

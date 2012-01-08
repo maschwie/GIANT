@@ -1,0 +1,534 @@
+% ==============================================================================
+%  $RCSfile: selection.tex,v $, $Revision: 1.24 $
+%  $Date: 2003-04-21 20:54:41 $
+%  $Author: schwiemn $
+%
+%  Description: UseCases für die Selektionen
+%
+%  Last-Ispelled-Revision: 1.11
+%
+% ==============================================================================
+
+
+\begin{uc}[Selektion zur aktuellen Selektion machen]
+          {UC: Selektion zur aktuellen Selektion machen}
+          
+Dieser UseCase dient dazu, eine Selektion zur aktuellen Selektion zu machen.
+Dies ist nötig, da nur die aktuelle Selektion mittels der Maus
+modifiziert werden kann (siehe auch \ref{Aktuelle Selektion vs Selektionen}). 
+          
+         
+  \begin{precond}
+    \cond Es gibt mindestens ein Anzeigefenster 
+          mit mindestens zwei Selektionen.
+
+  \end{precond}
+
+  \begin{postsuccess}
+    \cond Die vorherige aktuelle Selektion ist nicht mehr aktuell.
+    \cond Die gewählte Selektion ist nun die aktuelle Selektion und
+          als solche in der Selektionsauswahlliste
+          (siehe \ref {Selektionsauswahlliste}) gekennzeichnet.
+    \cond Die Fenster-Knoten und Fenster-Kanten der jetzt 
+          aktuellen Selektion sind entsprechend hervorgehoben (siehe   
+          \ref{Hervorheben von Selektionen und der aktuelle Selektion}).
+
+    
+  \end{postsuccess}
+ 
+  \begin{proc}    
+    \step[1]
+    Der Benutzer führt mit der linken Maustaste einen Doppelklick 
+    auf eine nicht aktuelle Selektion in der Selektionsauswahlliste
+    (siehe \ref{Selektionsauswahlliste}) durch.
+    Ausgeblendete Selektionen (siehe UseCase \ref{Selektionen ausblenden})
+    können nicht zur aktuellen Selektion gemacht werden.
+
+    \step[2]
+    GIANT macht die entsprechende Selektion zur aktuellen Selektion.  
+  \end{proc}
+          
+\end{uc}
+
+
+% ==============================================================================
+% \begin{uc}[Aktuelle Selektion zurück stufen]
+%           {UC: Aktuelle Selektion zurück stufen}
+
+%
+% Gestrichen nach Beschluss vom Meeting am 2003-04-04.
+%
+          
+% Mit diesem UseCase kann
+% eine aktuelle Selektion auf den Status einer \gq{normalen} Selektion
+% zurückgestuft werden (siehe auch \ref{Aktuelle Selektion vs Selektionen}). 
+         
+%   \begin{precond}
+%     \cond Es gibt ein Anzeigefenster mit einer aktuellen Selektion.
+%   \end{precond}
+
+%   \begin{postsuccess}
+%     \cond Es gibt keine aktuelle Selektion mehr.
+    
+%   \end{postsuccess}
+ 
+%   \begin{proc}    
+%     \step[1]
+%     Der Benutzer führt mit der linken Maustaste einen Doppelklick 
+%     auf die aktuelle Selektion in der Selektionsauswahlliste
+%     (siehe \ref{Selektionsauswahlliste}) durch..
+
+%     \step[2]
+%     GIANT stuft die aktuelle Selektion auf den Status einer \gq{normalen}
+%     Selektion zurück.
+%   \end{proc}
+    
+% \end{uc}
+
+
+% ==============================================================================
+\begin{uc}[Selektion graphisch hervorheben]
+          {UC: Selektion graphisch hervorheben}
+          
+Dieser UseCase dient zum Hervorheben von Selektionen innerhalb eines
+Anzeigefensters (siehe auch \ref {hervorheben von Knoten und Kanten}).
+
+  \begin{precond}
+    \cond Es gibt ein Anzeigefenster mit mindestens einer Selektion.
+   
+  \end{precond}
+
+  \begin{postsuccess}
+    \cond 
+    Die Selektion ist im entsprechenden Anzeigefenster hervorgehoben.
+    
+    \cond
+    War bereits eine andere Selektion mit der vom Benutzer gewählten
+    Farbe hervorgehoben (die Farbe, welche im Popup-Menü der
+    Selektionsauswahlliste unter \gq{Highlight Selection} gewählt wurde 
+    -- siehe \ref{Selektionsauswahlliste}), so ist diese Selektion nicht
+    mehr hervorgehoben.
+ 
+    
+  \end{postsuccess}
+ 
+  \begin{proc}    
+    \step[1]
+    Der Benutzer startet den UseCase mit einem Rechtsklick 
+    auf die gewünschte Selektion in der
+    Selektionsauswahlliste (siehe \ref{Selektionsauswahlliste})
+    und wählt im zugehörigen Popup-Menü das Untermenü
+    \gq{Highlight Selection} und dort die gewünschte Farbe aus.
+  
+    \step[2]
+    GIANT hebt die Selektion mit der ausgewählten Farbe hervor.
+    
+  \end{proc}
+
+
+
+\end{uc}
+
+
+% ==============================================================================
+\begin{uc}[Graphische Hervorhebung einer Selektion aufheben]
+      {UC: Graphische Hervorhebung einer Selektion aufheben}
+      
+Dieser UseCase dient dazu, die Hervorhebung von Selektionen innerhalb eines 
+Anzeigefensters aufzuheben.
+      
+  \begin{precond}
+    \cond 
+    Es gibt ein Anzeigefenster mit mindestens einer hervorgehobenen
+    Selektion.
+   
+  \end{precond}
+
+  \begin{postsuccess}
+    \cond 
+    Die Selektion ist im entsprechenden Anzeigefenster nicht mehr 
+    hervorgehoben.
+ 
+  \end{postsuccess}
+
+  
+  \begin{proc}    
+    \step[1]    
+    Der Benutzer startet den UseCase mit einem Rechtsklick 
+    auf die gewünschte Selektion in der
+    Selektionsauswahlliste (siehe \ref{Selektionsauswahlliste})
+    und wählt im zugehörigen Popup-Menü den Eintrag
+    \gq{Unhighlight Selection} aus.
+  
+    \step[2]
+    GIANT setzt die Hervorhebung der Selektion zurück.
+    
+  \end{proc} 
+      
+      
+\end{uc}
+
+%===============================================================================
+\begin{uc}[Neue Selektion anlegen]{UC: Neue Selektion anlegen}
+
+Mit diesem UseCase können neue, leere Selektionen angelegt werden.
+
+  \begin{precond}
+    \cond Es gibt mindestens ein geöffnetes Anzeigefenster.
+  \end{precond}
+
+  \begin{postsuccess}
+    \cond Eine neue Selektion mit dem vorgegebenen Namen
+         ist angelegt und erscheint in der Liste der Selektionen 
+         (siehe \ref{Selektionsauswahlliste}).
+    \cond Diese neue Selektion hat keinen Inhalt (keine selektierten 
+          Fenster-Knoten und Fenster-Kanten).
+
+  \end{postsuccess}
+
+  \begin{postfail}
+    \cond Das System bleibt im bisherigen Zustand.
+  \end{postfail}
+  
+  \begin{proc}    
+    \step[1]
+    Der Benutzer startet den UseCase mit einem Rechtsklick auf die
+    Selektionsauswahlliste (siehe \ref{Selektionsauswahlliste})
+    und wählt im Popup-Menü den Eintrag
+    \gq{New Selection} aus.
+    
+    \step[2] 
+    GIANT öffnet den allgemeinen Texteingabedialog 
+    (siehe \ref{DIALOG-WINDOW}).
+      
+    \step[3] 
+    Der Benutzer gibt dort einen zulässigen Namen 
+    (siehe \ref{afa Zulaessige Namen}) für die neue Selektion 
+    ein und bestätigt mit OK. \\
+    Hat bereits eine andere Selektion innerhalb des Anzeigefensters den selben
+    Namen, erscheint eine Fehlermeldung.
+    
+    \step[4]
+    GIANT erzeugt die neue Selektion.
+  
+  \end{proc}
+
+  \begin{aproc}
+    \astep{3} Der Benutzer bricht die Verarbeitung mit Cancel ab.
+  \end{aproc}
+
+\end{uc}
+
+
+%===============================================================================
+\begin{uc}[Selektion kopieren]{UC: Selektion kopieren}
+Dieser UseCase dient zum Kopieren von Selektionen innerhalb eines 
+Anzeigefensters.
+
+  \begin{precond}
+    \cond Es gibt mindestens ein geöffnetes Anzeigefenster mit 
+          mindestens einer Selektion.
+  \end{precond}
+
+  \begin{postsuccess}
+    \cond 
+    Eine neue Selektion mit entsprechendem Namen ist angelegt 
+    und erscheint in der Liste der Selektionen
+    (siehe \ref{Selektionsauswahlliste}).
+    \cond
+    Die neue Selektion umfasst die selben Fenster-Knoten und Fenster-Kanten 
+    wie die Selektion, von der kopiert wurde.
+
+  \end{postsuccess}
+
+  \begin{postfail}
+    \cond Das System bleibt im bisherigen Zustand.
+  \end{postfail}
+  
+  \begin{proc}    
+    \step[1]
+    Der Benutzer startet den UseCase durch Rechtsklick auf die zu kopierende
+    Quell-Selektion in der 
+    Selektionsauswahlliste (siehe \ref{Selektionsauswahlliste})
+    und wählt in dem Popup-Menü den Eintrag \gq{Copy Selection} aus.
+    
+    \step[2] 
+    GIANT öffnet den allgemeinen Texteingabedialog 
+    (siehe \ref{DIALOG-WINDOW}).
+      
+    \step[3] 
+    Der Benutzer gibt dort einen zulässigen Namen für die neue Selektion 
+    ein und bestätigt mit OK (siehe \ref{afa Zulaessige Namen}).\\
+    Hat bereits eine andere Selektion innerhalb des Anzeigefensters den selben
+    Namen erscheint eine Fehlermeldung.
+    
+    \step[4]
+    GIANT kopiert die Quell-Selektion und legt eine neue Selektion an.
+  
+  \end{proc}
+
+  \begin{aproc}
+    \astep{3} Der Benutzer bricht die Verarbeitung mit Cancel ab.
+  \end{aproc}
+
+\end{uc}
+
+
+
+%===============================================================================
+\begin{uc}[Selektion löschen]{UC: Selektion löschen}
+
+Dieser UseCase dient zum Löschen von Selektionen innerhalb eines 
+Anzeigefensters. Hierdurch bleiben die Fenster-Knoten und Fenster-Kanten
+unverändert. Die Standard-Selektion (siehe \ref{Standard-Selektion}) kann
+nicht gelöscht werden.
+
+  \begin{precond}
+     \cond Es gibt mindestens ein geöffnetes Anzeigefenster mit 
+           mindestens zwei Selektionen.
+   \end{precond}
+
+
+  \begin{postsuccess}
+    \cond 
+    Die entsprechende Selektion ist gelöscht.
+
+    \cond 
+    Wurde die aktuelle Selektion gelöscht (siehe 
+    \ref{Aktuelle Selektion vs Selektionen}), so wird die
+    Standard-Selektion zur aktuellen Selektion.
+    
+    \cond 
+    Die Fenster-Knoten und Fenster-Kanten, 
+    die zur gelöschten Selektion gehören, werden nicht gelöscht.
+          
+    \cond War die Selektion hervorgehoben, so wird die
+    Hervorhebung der Fenster-Knoten und Fenster-Kanten aufgehoben.
+
+    \cond
+    Waren Fenster-Knoten und Fenster-Kanten der gelöschten Selektion
+    ausgeblendet (siehe UseCase \ref{Selektionen ausblenden}), so
+    werden diese Fenster-Knoten und Fenster-Kanten wieder eingeblendet.
+    
+  \end{postsuccess}
+
+  \begin{postfail}
+    \cond Das System bleibt im bisherigen Zustand.
+  \end{postfail}
+  
+  \begin{proc}    
+    \step[1]
+    Der Benutzer startet den UseCase durch Rechtsklick auf die zu löschende
+    Selektion in der Selektionsauswahlliste (siehe 
+    \ref{Selektionsauswahlliste})
+    und wählt aus dem Popup-Menü den Eintrag \gq{Delete Selection}
+    aus. Falls der Benutzer die Standard-Selektion 
+    (siehe \ref{Standard-Selektion}) ausgewählt hat, ist
+    der Eintrag \gq{Delete Selection} deaktiviert.
+      
+    \step[2]
+    GIANT löscht die entsprechende Selektion.
+  
+  \end{proc}
+
+\end{uc}
+
+%===============================================================================
+\begin{uc}[Selektion manuell modifizieren]
+         {UC: Selektionen manuell modifizieren}
+         
+Jeweils die aktuelle Selektion kann mittels der Maus modifiziert 
+werden (siehe auch  \ref{Aktuelle Selektion vs Selektionen}).  
+
+
+  \begin{precond}
+     \cond 
+     Es gibt mindestens ein geöffnetes Anzeigefenster mit mindestens
+     einer Selektion.
+   \end{precond}
+
+
+  \begin{postsuccess}
+    \cond 
+    Die entsprechenden Änderungen an der Selektion werden von GIANT
+    sofort durchgeführt und übernommen.
+    
+  \end{postsuccess}
+
+  
+  \begin{proc}    
+    \step[1]
+    Falls noch nicht der Fall, macht der Benutzer die zu modifizierende 
+    Selektion zur aktuellen Selektion
+    (siehe \ref{Selektion zur aktuellen Selektion machen}).
+    
+    \step[2]
+    Mittels der unter 
+    \ref{Selektieren von Fenster-Knoten und Fenster-Kanten in Anzeigefenstern}
+    beschriebenen Möglichkeiten fügt der Benutzer der Selektion neue
+    Fenster-Knoten und Fenster-Kanten hinzu oder entfernt bestehende
+    Fenster-Knoten und Fenster-Kanten aus der Selektion.
+    
+  \end{proc}
+
+
+\end{uc}
+
+%===============================================================================
+\begin{uc}[Selektion aus IML-Teilgraph erzeugen]
+         {UC: Selektion aus IML-Teilgraph erzeugen}
+         
+Leitet eine Selektion aus einem IML-Teilgraphen ab
+(siehe \ref{Selektion aus IML-Teilgraphen ableiten}).
+
+
+  \begin{precond}
+     \cond 
+     Es gibt mindestens ein geöffnetes Anzeigefenster.
+     
+     \cond
+     Es gibt mindestens einen IML-Teilgraphen.
+     
+   \end{precond}
+
+
+  \begin{postsuccess}
+    \cond 
+    Im Ziel-Anzeigefenster wurde eine neue Selektion
+    mit dem entsprechenden Namen erzeugt.
+    
+  \end{postsuccess}
+  
+  \begin{postfail}
+    \cond Das System bleibt im bisherigen Zustand.
+  \end{postfail}
+  
+  \begin{proc} 
+     
+    \step[1]
+    Der Benutzer führt einen Rechtsklick auf den Quell-IML-Teilgraphen 
+    in der entsprechenden Liste im Hauptfenster 
+    (siehe \ref{GUI Subgraph List}) aus
+    und wählt im dazugehörigen Popup-Menü 
+    (siehe \ref{Popup-Menü Subgraph List})
+    den Eintrag \gq{Create Window Selection} aus.
+        
+    \step[2]
+    Die Statuszeile im Hauptfenster zeigt an \gq{Please select window for
+    Insertion of new window selection}, der Mauszeiger verwandelt sich in
+    ein Fadenkreuz.
+    
+    \step[3]
+    Der Nutzer klickt auf den sichtbaren Anzeigeinhalt des
+    Anzeigefensters, in dem er die neue
+    Selektion erstellen will (Ziel-Anzeigefenster).
+
+
+    \step[4]
+    GIANT zeigt den allgemeinen Texteingabedialog (siehe \ref{DIALOG-WINDOW}).
+            
+    \step[5] Der Benutzer gibt einen Namen (siehe auch 
+             \ref{afa Zulaessige Namen}) 
+             für die neu zu erstellende Selektion ein und
+             bestätigt mit OK.
+
+    \step[6]
+    Die Statuszeile im Hauptfenster wechselt wieder zur normalen Anzeige.
+    GIANT erzeugt gemäß der unter Abschnitt 
+    \ref{Selektion aus IML-Teilgraphen ableiten}
+    beschriebenen Konvention im Ziel-Anzeigefenster eine neue Selektion als 
+    Ableitung aus dem Quell-IML-Teilgraphen.
+
+  \end{proc}
+  
+  \begin{aproc}    
+
+    \astep{3} Der Benutzer bricht den UseCase durch einen Rechtsklick ab.
+    \astep{5} Der Benutzer bricht den UseCase mit Cancel ab.
+
+  \end{aproc}
+
+
+\end{uc}
+
+
+
+%===============================================================================
+\begin{uc}[Mengenoperationen auf 2 Selektionen]
+{UC: Mengenoperationen auf 2 Selektionen}
+Zusätzlich zu den Möglichkeiten der Anfragesprache GSL (siehe Kapitel
+\ref {GIANT Scripting Language}) kann der Benutzer
+die gängigen Mengenoperationen, wie Mengenvereinigung, Schnitt und Differenz,
+auch direkt über einen entsprechenden Dialog 
+(siehe \ref{Common-Set-Operation-Dialog})  ausführen.
+Das Vorgehen ist analog zu dem UseCase
+\ref{Mengenoperationen auf 2 IML-Teilgraphen}.
+
+
+
+  \begin{precond}
+    \cond Es gibt ein geöffnetes Anzeigefenster mit mindestens zwei 
+          Selektionen.
+  \end{precond}
+
+  \begin{postsuccess}
+    \cond 
+    Eine neue Selektion mit entsprechendem Namen (eingegeben unter TARGET) 
+    ist angelegt 
+    und erscheint in der Liste der Selektionen 
+    (siehe \ref{Selektionsauswahlliste}).
+       
+    \cond
+    Im Falle einer Mengenvereinigung umfasst, die neue Selektion TARGET alle
+    Fenster-Knoten und Fenster-Kanten aus der LEFT\_SOURCE Selektion und der 
+    RIGHT\_SOURCE Selektion.
+    
+    \cond
+    Im Falle einer Mengendifferenz umfasst, die neue Selektion TARGET alle
+    Fenster-Knoten und Fenster-Kanten aus der LEFT\_SOURCE Selektion, 
+    die nicht Bestandteil der  RIGHT\_SOURCE Selektion sind.
+
+    \cond
+    Im Falle eines Mengenschnitts umfasst, die neue Selektion TARGET alle
+    Fenster-Knoten und Fenster-Kanten, die der LEFT\_SOURCE Selektion und der 
+    RIGHT\_SOURCE Selektion gemeinsam angehören.
+
+  \end{postsuccess}
+
+  \begin{postfail}
+    \cond Das System bleibt im bisherigen Zustand.
+  \end{postfail}
+  
+  \begin{proc}    
+    \step[1]
+    Der Benutzer startet den UseCase über durch Auswahl des
+    Menüpunktes \gq{Selection Set Operation} 
+    aus dem Popup-Menü in der Selektionsauswahlliste (siehe
+    \ref{Selektionsauswahlliste}).
+    
+    \step[2] 
+    GIANT öffnet den Set-Operation-Dialog 
+    (siehe \ref{Common-Set-Operation-Dialog}).
+    
+    \step[3] 
+    Der Benutzer wählt dort die beiden Quell-Selektionen (LEFT\_SOURCE und 
+    RIGHT\_SOURCE)
+    aus, bestimmt die durchzuführende Mengenoperation und gibt unter 
+    TARGET den Namen der neu zu erzeugenden Selektion 
+    ein (gültige Namen siehe \ref{afa Zulaessige Namen}). \\
+    Dann bestätigt er die Eingabe mit OK.
+       
+    \step[4]
+    GIANT führt die Mengenoperation aus.
+  
+  \end{proc}
+
+  \begin{aproc}
+    \ageneral 
+    Der Benutzer bricht die Eingabe der Daten mit Cancel ab.
+  \end{aproc}
+
+
+
+\end{uc}
+

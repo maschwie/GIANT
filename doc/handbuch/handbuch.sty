@@ -1,0 +1,171 @@
+% ==============================================================================
+%  $RCSfile: handbuch.sty,v $, $Revision: 1.2 $
+%  $Date: 2003-09-18 14:50:39 $
+%  $Author: koppor $
+%
+%  Description:
+%
+% ==============================================================================
+
+%copied from GSL.tex
+\newcommand\typename[2]{\newcommand{#1}{{\sf #2}\xspace}}
+\typename{\tnodeid}{Node\_Id}
+\typename{\tedgeid}{Edge\_Id}
+\typename{\tnodeset}{Node\_Set}
+\typename{\tedgeset}{Edge\_Set}
+\typename{\tobjectset}{Object\_Set}
+\typename{\tsloc}{Source\_Location}
+\typename{\tstring}{String}
+\typename{\tboolean}{Boolean}
+\typename{\tnatural}{Natural}
+\typename{\tlist}{List}
+\typename{\tvarreference}{Var\_Reference}
+\typename{\tscriptreference}{Script\_Reference}
+
+
+%20030918 OK seems to be copied from spec.sty, maybe useless for handbuch.tex
+
+%===============================================================================
+% TODO:
+%   Bei leeren Vorbedinungen keine TeX-Fehlermeldung
+%   Also dass
+%     \begin{precond}
+%     \end{precond}
+%   ohne was dazwischen funktioniert.
+
+%===============================================================================
+% Begriffslexikon
+%
+\newenvironment{nomenclature}
+{\begin{itemize}}
+{\end{itemize}}
+
+% Begriff
+%
+%  Parameter
+%
+%   1 Name
+%   2 Englische Uebersetzung
+%   3 Erklaerung
+%   n/a Synonyme, die in der Spezifikation nicht verwendet werden sollen.
+%       Diese werden durch ein (noch zu schreibendes) Skript
+%       in saemtlichen Texfiles gesucht und angemeckert.
+\newcommand{\term}[3]{\item \textbf{#1} (#2)\\#3}
+
+
+%===============================================================================
+% Use-Cases
+%
+% Reihenfolge der Environments:
+%   * precond
+%   * postsuccess
+%   * [postfail]
+%   * proc
+%   * [eproc]
+%   * [aproc]
+
+% used to avoid double references
+\newcounter{uccount}
+\newcommand\uclabel[1]{\theuccount :#1}
+\newcommand\refstep[1]{\ref{\uclabel{#1}}} %used to reference steps
+
+% Wenn keine alternativen Ablaeufe vorgesehen sind, werden diese eingesetzt
+\newcommand\aprocdefault{
+\begin{aproc}
+  \ageneral Es sind keine alternativen Abl\"aufe vorgesehen.
+\end{aproc}
+}
+\newcounter{aprocexists} %0=keine aproc definiert, 1 sonst
+
+% Wenn keine Fehlerfaelle definiert wruden, werden diese eingesetzt
+\newcommand\postfaildefault{
+\begin{postfail}
+    \cond Es sind keine Fehlerf\"alle vorgesehen.
+\end{postfail}
+}
+\newcounter{postfailexists} %0=keine aproc definiert, 1 sonst
+
+%  Parameter
+%
+%   1 label
+%   2 name
+%
+\newenvironment{uc}[2][]
+{
+\stepcounter{uccount}
+\setcounter{aprocexists}{0}
+\setcounter{postfailexists}{0}
+\ifnum\value{section}=0\else\clearpage\fi
+\section{#2}\ifx#1\undefined\else\label{#1}\fi
+}
+{
+\ifnum\value{aprocexists}=0\aprocdefault\fi
+}
+
+% Vor- und Nachbedingungen als enumeration
+\newenvironment{precond}
+{\subsection{Vorbedingung}\begin{enumerate}}
+{\end{enumerate}}
+
+\newenvironment{postsuccess}
+{\subsection{Nachbedingung Erfolg}\begin{enumerate}}
+{\end{enumerate}}
+
+\newenvironment{postfail}{
+\setcounter{postfailexists}{1}
+\subsection{Nachbedingung Fehlschlag}
+\begin{enumerate}
+}
+{
+\end{enumerate}
+}
+
+% Bedingung
+\newcommand{\cond}{\item }
+
+% Beschreibung
+\newenvironment{proc}
+{
+%insert default postfail, if no postfail specified
+\ifnum\value{postfailexists}=0\postfaildefault\fi
+
+%begin real Beschreibung
+\subsection{Beschreibung}\begin{enumerate}
+}
+{
+\end{enumerate}
+}
+
+% Unterpunkte für die Beschreibung
+\newenvironment{subproc}
+{\begin{enumerate}
+    \setlength{\itemsep}{0ex plus 0.2ex}     
+    \renewcommand{\labelenumii}{\arabic{enumi}.\alph{enumii}}}
+{\end{enumerate}}
+
+\newcommand{\step}[1][]{\item \ifx#1\undefined\else\label{\uclabel{#1}}\fi}
+
+% Erweiterungen
+\newenvironment{eproc}
+{\subsection{Erweiterungen}\begin{itemize}}
+{\end{itemize}}
+
+\newcommand{\estep}[1]{\item Bei Punkt \ref{\uclabel{#1}}:\\}
+
+% Alternativen
+\newenvironment{aproc}{
+\setcounter{aprocexists}{1}
+\subsection{Alternativen}
+\begin{itemize}
+}
+{
+\end{itemize}
+}
+
+\newcommand{\astep}[1]{\item Bei Punkt \refstep{#1}:\\}
+
+\newcommand{\ageneral}{\item Generell: \\}
+
+%%% Local Variables: 
+%%% TeX-master: "spec"
+%%% End: 

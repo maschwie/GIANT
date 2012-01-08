@@ -1,0 +1,39 @@
+//
+//
+
+set (+all_routines,
+{ 
+  ()
+  [
+    set (+add_node,
+    {
+      ()
+      [
+        add ('v1, n);
+      ]
+    });
+
+    set (+all_routines_loop,
+    {
+      ()
+      [
+        v1;
+        v2;
+        set ('n, get_first (v2));
+        if (equal (get_type (n), "Routine"), add_node, null);
+        sub ('v2, n);
+        v1;
+        v2;
+        if (less (size_of (v2), 1), false, true);
+      ]
+    });
+
+    +n;
+    +v1;
+    +v2;
+    set ('v1, empty_node_set());
+    set ('v2, all_nodes ());
+    loop (all_routines_loop);
+    v1;
+  ]
+})

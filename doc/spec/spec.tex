@@ -1,0 +1,285 @@
+% ==============================================================================
+%  $RCSfile: spec.tex,v $, $Revision: 1.58 $
+%  $Date: 2003-11-27 17:42:00 $
+%  $Author: koppor $
+%
+%  Description: Master Datei der Spezifikation
+%
+%  Last-Ispelled-Revision: 1.30
+%
+% ==============================================================================
+
+\documentclass[a4paper,titlepage,11pt,german,twoside]{scrbook}
+
+
+\makeatletter
+
+%koma uses \chapter*, but we want to use \chapter
+%  changed srcbook.cls-commands
+\renewcommand\idx@heading{%
+  \twocolumn
+  \chapter{\indexname}\@mkboth{\indexname}{\indexname}
+}
+
+%Nummerierung soll net so eng aneinanderhaengen
+\renewcommand*\l@section{\@dottedtocline{1}{1.5em}{3em}}
+
+\makeatother
+
+
+\usepackage{../styles/common}
+
+\usepackage{spec}
+
+\usepackage{makeidx}
+\makeindex
+
+% subsubsections nummerieren
+\setcounter{secnumdepth}{3}
+
+\newcommand\version{Version 1.1\xspace}
+%\newcommand\version{\today\xspace}
+
+%\graphicspath{{gui-pictures/}} %OK: it MAY work with graphics. With graphicx, it surely doesn't
+
+% header
+\fancyhead{}
+\fancyhead[LE,RO]{\slshape \company}
+\fancyhead[LO,RE]{\slshape \leftmark}
+\fancyfoot[LE,RO]{\thepage{}}
+\fancyfoot[LO,RE]{\version}
+
+\begin{document}
+
+% title page
+\thispagestyle{empty}
+\hfill
+\parbox{5.5cm}
+{Universität Stuttgart\\
+Studienprojekt A -- IML Browser\\
+\company}
+
+\vspace{3cm}
+
+\begin{center}
+  \Huge
+  \textsf{Spezifikation}\\
+  \vspace{.5cm}
+  {\Large\version}\\
+  \vspace{3cm}
+  \includegraphics[scale=.74]{../logo}
+\end{center}
+\newpage
+
+\input{history}
+
+%===============================================================================
+%
+% ToDo - Aus fertigem Dokument entferenen
+%
+% \chapter*{ToDo -- nicht in fertiger Spez.}
+
+% Hier Sachen beschreiben, die irgendwie beim Erstellen der Spez.\ 
+% beachtet werden sollen.
+
+% \input{todo_spec}
+
+%===============================================================================
+%
+% Inhaltsverzeichnis
+%
+\setcounter{tocdepth}{1}
+\tableofcontents
+
+%===============================================================================
+%
+% Einleitung
+%
+\chapter{Einleitung}
+\input{intro}
+
+%===============================================================================
+%
+% Produktübersicht
+%
+\chapter{Produktübersicht}
+
+In diesem Kapitel werden einige grundlegende Konzepte von GIANT 
+vorgestellt und kurz beschrieben. Dieses Kapitel
+stellt lediglich eine kurze Übersicht dar, die hier 
+vorgestellten Konzepte werden weiter hinten 
+in diesem Dokument im Detail spezifiziert -- siehe hierzu
+auch die Verweise innerhalb dieses Kapitels. 
+
+\input{product}
+
+%===============================================================================
+%
+% Allgemeines zu den Funktionalen Anforderungen
+%
+\chapter{Allgemeine Funktionale Anforderungen}
+
+Dieses Kapitel beschreibt die funktionalen Anforderungen an GIANT, die
+das System als Ganzes und nicht nur einzelne UseCases betreffen. Dies
+sind z.B. allgemeine Bedienkonzepte zur Selektion von Fenster-Knoten und
+Fenster-Kanten, sowie das grundlegende Verhalten von GIANT im Fehlerfall.
+
+\input{afa}
+
+%===============================================================================
+% 
+% Funktionale Anforderungen
+%
+\chapter{Funktionale Anforderungen}
+\label{Kapitel-Funktionale Anforderungen}
+
+Dieses Kapitel beschreibt die funktionalen Anforderungen
+an GIANT in Form von UseCases, d.h. 
+die dem Benutzer über die GUI von GIANT zugängliche
+Funktionalität wird in diesem Kapitel mittels
+UseCases spezifiziert.
+
+\input{fa}
+
+%===============================================================================
+% 
+% Anfragesprache
+%
+\chapter{GIANT Scripting Language}
+\label {GIANT Scripting Language}
+
+In diesem Kapitel werden die Fähigkeiten der GIANT Scripting Language (GSL)
+beschrieben. Syntax und Semantik der GSL sind einem separaten Dokument,
+der GIANT Scripting Language Spezifikation zu entnehmen.
+
+\input{language}
+
+%===============================================================================
+% 
+% Layout 
+%
+\chapter{Layoutalgorithmen}
+\label{Layoutalgorithmen}
+\input{layouts}
+
+%===============================================================================
+% 
+% Projektverwaltung
+%
+\chapter{GIANT Projektverwaltung}
+\label{GIANT Projektverwaltung}
+
+In diesem Kapitel wird beschrieben, wie persistente Arbeitsergebnisse
+von GIANT strukturiert und gespeichert werden.
+Arbeitsergebnisse sind z.B. vom Benutzer erzeugte Anzeigefenster
+mit als Fenster-Knoten visualisierten IML-Knoten eines IML-Graphen.
+
+\input{project}
+
+%===============================================================================
+% 
+% Beschreibung aller Konfigurationsdateien
+%
+\chapter{Konfiguration von GIANT}
+\label{Konfiguration von GIANT}
+
+Hier wird beschrieben, wie benutzerdefinierbare Einstellungen von
+GIANT gespeichert und verwaltet werden. In diesem Kapitel wird 
+insbesondere spezifiziert, welche Einstellungen der Benutzer
+in welchen Konfigurationsdateien vornehmen kann.
+
+\input{config}
+
+%===============================================================================
+% 
+% Beschreibung der GUI
+%
+\chapter{Beschreibung der GUI}
+
+In diesem Kapitel werden die Dialoge und Menüs der graphischen
+Benutzerschnittstelle von GIANT beschrieben.
+Die Funktionalität dieser Dialoge wird im Detail bei
+den jeweiligen UseCases beschrieben.
+\input{gui}
+
+%===============================================================================
+% 
+% Visualisierung des IML-Graphen
+%
+\chapter{Visualisierung des IML-Graphen}
+\label{Visualisierung des IML-Graphen}
+
+Dieses Kapitel beschreibt, wie IML-Knoten und IML-Kanten des
+IML-Graphen innerhalb von Anzeigefenstern als Fenster-Knoten
+und Fenster-Kanten dargestellt werden. Spezifiziert wird hier
+das Ergebnis der Visualisierung, also das
+Aussehen der Fenster-Knoten und Fenster-Kanten, nicht aber die Art und Weise,
+wie GIANT diese Visualisierung erzeugt bzw.\ berechnet.
+
+\input{visulization}
+
+%===============================================================================
+% 
+% Nichtfunktionale Anforderungen
+%
+\chapter{Nichtfunktionale Anforderungen}
+
+Hier werden die wesentlichen nichtfunktionalen Anforderungen an GIANT
+spezifiziert. Insbesondere sind dies Anforderungen aus dem Bereich
+des Software-Engineering, wie z.B. Wartbarkeit und Erweiterbarkeit.
+
+\input{nfa}
+
+%===============================================================================
+% 
+% Technische Produktumgebung
+%
+\chapter{Technische Produktumgebung}
+
+Hier wird die zum Betrieb von GIANT nötige Hardware 
+und die nötige Software spezifiziert.
+
+\input{technical}
+
+%===============================================================================
+% 
+% Anforderungen an die Entwicklungsumgebung
+%
+\chapter{Anforderungen an die Umgebung}
+
+Hier werden die wesentlichen Anforderungen an die Entwicklungsumgebung
+von GIANT spezifiziert. Dies sind Werkzeuge, Programmiersprachen und
+Bibliotheken, die bei der Entwicklung eingesetzt werden müssen, und
+Standards, die beachtet werden sollen.
+Spezifiziert wird hier auch die Sprache aller zum Lieferumfang von GIANT
+gehörender Dokumente.
+
+\input{development}
+
+%===============================================================================
+% 
+% Begriffslexikon
+%
+\chapter{Begriffslexikon}
+
+Das Begriffslexikon nennt Begriffe aus der \gq{realen Welt} und definiert
+ihre besondere Bedeutung innerhalb dieser Spezifikation und darauf 
+aufbauender Dokumente. Des weiteren wird hier die englische Übersetzung 
+dieser Begriffe für alle englischsprachigen Dokumente von GIANT vorgegeben.
+
+\input{nomenclature}
+
+%==============================================================================
+%
+%  Index
+%
+\printindex
+
+%==============================================================================
+% 
+% Anhang
+%
+\newpage
+\appendix
+
+\end{document}

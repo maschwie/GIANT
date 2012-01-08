@@ -1,0 +1,25 @@
+// Beispiel zur Script-Aktivierung
+
+[ // Beginn einer Sequence
+
+  set              // action ist eine Variable, die an ein
+   (+result,       // Objekt gebunden ist, dessen Wert eine
+    action ());    // Aktivierungsinformation ist.
+                   // Die Aktivierung wird durch () ausgelöst.
+                   // Das Ergebnis wird dem neuen Objekt
+                   // zugewiesen, das an die neue Variable
+                   // result gebunden ist.
+
+  set              // Die neue lokale Variable var_name
+   (+var_name,     // wird an ein neues Objekt gebunden.
+    {() null});    // Das neue Objekt erhält als Wert eine
+                   // Aktivierungsinformation für das
+                   // Script {() null}.
+  var_name ();     // Inspektion von var_name und Aktivierung
+                   // des referenzierten Scripts
+
+  { ()             // Deklaration eines Scripts...
+    null
+  } ();            // ...und sofortige Aktivierung.
+
+] // Ende der Sequence

@@ -1,0 +1,307 @@
+% ==============================================================================
+%  $RCSfile: additional.tex,v $, $Revision: 1.21 $
+%  $Date: 2003-04-21 20:54:40 $
+%  $Author: schwiemn $
+%
+%  Description: Sonstige UseCases
+%
+%  Last-Ispelled-Revision: 1.6
+%
+% ==============================================================================
+
+
+\begin{uc}[Layout auf Selektion anwenden]{UC: Layout auf Selektion anwenden}
+\index{Selektionen!layouten}
+
+Mittels dieses UseCases können Selektionen innerhalb
+eines Anzeigefensters layoutet werden.
+Die verfügbaren Layoutalgorithmen sind in Kapitel 
+\ref{Layoutalgorithmen} beschrieben.
+
+
+  \begin{precond}
+    \cond Es gibt mindestens ein geöffnetes Anzeigefenster mit
+          mindestens einer Selektion (dies kann auch die
+          immer vorhandene Standard-Selektion sein).
+
+  \end{precond}
+
+  \begin{postsuccess}
+    \cond 
+    Die Position der Fenster-Knoten der Selektion wurde gemäß
+    den Vorgaben des Layoutalgorithmus geändert. 
+
+    \cond
+    Alle anderen Fenster-Knoten bleiben unverändert.
+
+  \end{postsuccess}
+
+  \begin{postfail}
+    \cond Das System bleibt im bisherigen Zustand.
+
+    \cond Hat der Benutzer einen Layoutalgorithmus während der
+    Berechnung des Layouts abgebrochen, 
+    so bleiben die Positionen aller Fenster-Knoten des Anzeigefensters
+    unverändert.
+      
+  \end{postfail}
+  
+  \begin{proc}
+    
+    \step[1] Der Benutzer wählt aus der Selektionsauswahlliste (siehe
+    \ref{Selektionsauswahlliste}) die Selektion aus, deren
+    Fenster-Knoten layoutet werden sollen. Hierzu führt er einen
+    Rechtsklick auf die Selektion durch und wählt im Popup-Menü den
+    Eintrag \gq{Layout Selection} aus.
+
+    \step[2]
+    GIANT zeigt einen Dialog zur Auswahl und Konfiguration des
+    gewünschten Layoutalgorithmus 
+    (siehe \ref{Layoutalgorithmen-Dialog}).
+
+    \step[3]
+    Der Benutzer wählt in diesem Dialog den gewünschten Layoutalgorithmus
+    aus.
+
+    \step[4]
+    Falls der gewählte Layoutalgorithmus dies unterstützt, kann der
+    Benutzer in diesem Dialog die Klassenmengen (siehe Begriffslexikon), 
+    die beim Layout berücksichtigt werden sollen, vorgeben.
+    Bei baumförmigen Layouts kann er auch die ID des gewünschten 
+    Wurzelknotens eingeben.
+
+    \step[5]
+    Der Benutzer bestätigt seine Eingaben mit OK.
+    
+    % Eingefügt von Philipp am 19.04.
+    % Martin: Entfernt, da bei diesem UseCase nicht vorgesehen.
+
+    %\step[6]
+    %GIANT fordert den Anwender über die Statuszeile auf, die Zielposition
+    %des Layouts anzugeben (\gq{Please click on desired target position for
+    %Layout in Window}).
+
+    \step[6]
+    GIANT berechnet das Layout und zeigt einen Progressbar 
+    (siehe \ref{Progressbar-Modale}) an. 
+    Während der Berechnung des Layouts ist die GUI mit Ausnahme des
+    Progressbars gesperrt.
+         
+  \end{proc}
+
+  \begin{aproc}
+    \astep{3} Der Benutzer bricht die Verarbeitung mit Cancel ab.  
+    \astep{4} Der Benutzer bricht die Verarbeitung mit Cancel ab.
+
+    \astep{6} Der Benutzer kann die Berechnung eines Layouts jederzeit mit
+    Cancel (siehe \ref{Progressbar-Modale-Cancel}) abbrechen.
+  \end{aproc}
+
+\end{uc}
+
+
+\begin{uc}[Details zu Knoten in einem neuen Informationsfenster
+anzeigen]{UC: Details zu Knoten in einem neuen Informationsfenster
+anzeigen}
+
+Dieser UseCase ermöglicht dem Benutzer, sich alle verfügbaren
+Informationen zu einem Fenster-Knoten (Kanten und Attribute des
+zugehörigen IML-Knoten) anzeigen zu lassen. Mit diesem UseCase
+kann der Benutzer beliebig viele Knoten-Informationsfenster 
+(siehe \ref{Knoten-Informationsfenster}) öffnen.
+
+
+  \begin{precond}
+    \cond Es gibt mindestens ein geöffnetes Anzeigefenster mit
+          mindestens einem Fenster-Knoten.
+  \end{precond}
+
+  \begin{postsuccess}
+    \cond 
+    Die Daten über den Fenster-Knoten werden in einem neuen
+    Knoten-Informationsfenster angezeigt. 
+
+  \end{postsuccess}
+ 
+  \begin{proc}    
+
+    \step[1]
+    Der Benutzer wählt im entsprechenden Anzeigefenster den 
+    gewünschten Fenster-Knoten aus und führt einen Rechtsklick
+    auf diesen Fenster-Knoten durch. Im daraufhin angezeigten 
+    Popup-Menü
+    (siehe \ref{Node-Popup-Menü}) wählt der Benutzer dann 
+    den Eintrag \gq{Show Node Info Window} aus.
+
+    \step[2]
+    GIANT öffnet ein neues Knoten-Informationsfenster
+    (siehe \ref{Knoten-Informationsfenster}) und zeigt alle
+    verfügbaren Informationen zu dem IML-Knoten an.
+    
+  \end{proc}
+
+\end{uc}
+
+
+
+\begin{uc}[Details zu Knoten in einem bestehenden
+Informationsfenster anzeigen]{UC: Details zu Knoten in einem bestehenden
+Informationsfenster anzeigen}
+
+Mittels dieses UseCase kann sich der Benutzer alle verfügbaren
+Informationen zu einem Fenster-Knoten (Kanten und Attribute des
+zugehörigen IML-Knoten) innerhalb eines bereits geöffneten
+Knoten-Informationsfensters (siehe \ref{Knoten-Informationsfenster})
+anzeigen lassen.
+
+
+  \begin{precond}
+    \cond Es gibt mindestens ein geöffnetes Anzeigefenster mit
+          mindestens einem Fenster-Knoten.
+
+    \cond Es gibt mindestens ein geöffnetes Knoten-Informationsfenster.
+
+  \end{precond}
+
+  \begin{postsuccess}
+
+    \cond 
+    Anstatt der Daten, die zuvor in dem Knoten-Informationsfenster
+    angezeigt wurden, werden dort nun die Informationen zu dem 
+    gewählten Fenster-Knoten angezeigt.
+
+  \end{postsuccess}
+
+
+  \begin{postfail}
+
+    \cond Hat der Benutzer den UseCase abgebrochen, bleibt
+          das System im bisherigen Zustand.
+
+  \end{postfail}
+
+
+
+  \begin{proc}    
+
+    \step[1]
+    Der Benutzer betätigt in einem geöffneten Knoten-Informationsfenster
+    den Button \gq{Pick} (siehe \ref{Knoten-Informationsfenster}).
+
+    \step[2]
+    Daraufhin fordert GIANT den Benutzer auf, einen Fenster-Knoten
+    auszuwählen.
+
+    \step[3]
+    Der Benutzer wählt den gewünschten Fenster-Knoten dadurch aus, dass
+    er innerhalb des Anzeigeinhaltes eines Anzeigefensters mittels
+    eines Fadenkreuzes den Fenster-Knoten als Zielposition
+    vorgibt. Das Verfahren zur Vorgabe der Zielposition ist im
+    Detail unter \ref{Vorgabe der Zielposition} beschrieben.
+
+    \step[4]
+    GIANT stellt die verfügbaren Informationen zu dem ausgewählten
+    Fenster-Knoten im Knoten-Informationsfenster dar.
+    
+  \end{proc}
+
+  \begin{aproc}
+    \astep{3} Während der Fadenkreuzcursor aktiv ist, kann der Benutzer 
+              den UseCase mit einem Rechtsklick auf eine beliebige
+              Stelle abbrechen.  
+  \end{aproc}
+
+\end{uc}
+
+
+
+
+\begin{uc}[Anzeige des Quellcodes eines Knotens in einem externen Editor]
+{UC: Anzeige des Quellcodes eines Knotens in externem Editor}
+
+Mittels dieses UseCases kann der zu einem IML-Knoten korrespondierende
+Quellcode innerhalb eines Editors (unterstützt werden Emacs und vi)
+zur Anzeige gebracht werden.
+
+
+  \begin{precond}
+    \cond Es gibt mindestens ein geöffnetes Anzeigefenster mit
+          einem oder mehr Fenster-Knoten.
+       
+  \end{precond}
+
+  \begin{postsuccess}
+    \cond 
+    Der zu dem IML-Knoten korrespondierende Quellcode wird in
+    dem über die Konfigurationsdatei vorgegebenen Editor
+    angezeigt (siehe auch \ref{Konfig Editor zur Anzeige des Quellcodes}).
+    Der Cursor des Editors ist auf die dem IML-Knoten
+    entsprechende Position innerhalb des Quelltextes gesetzt, also
+    z.B.\ auf einen Bezeichnernamen, den der IML-Knoten repräsentiert.
+
+    \cond
+    Hat der IML-Knoten keine \gq{Source Code Position}, so wird
+    nur die zugehörige Quellcode-Datei geöffnet.
+ 
+  \end{postsuccess}
+
+  
+  \begin{proc}    
+
+    \step[1]
+    Der Benutzer wählt in einem Anzeigefenster den 
+    gewünschten Fenster-Knoten aus und führt einen Rechtsklick
+    auf diesen Knoten durch. Im darauf angezeigten Popup-Menü
+    (siehe \ref{Node-Popup-Menü}) wählt der Benutzer dann 
+    den Eintrag \gq{Show Corresponding Source Code} aus.
+    Der UseCase kann nicht für IML-Knoten durchgeführt werden,
+    für die die Reflektion zur Bauhaus IML-Graph-Bibliothek
+    keine zugehörige Quellcode-Datei liefern kann.
+
+    \step[2]
+    GIANT öffnet die Quellcode-Datei für den IML-Knoten in
+    einem Editor.
+    
+  \end{proc}
+
+
+\end{uc}
+
+
+
+\begin{uc}[Verschieben des sichtbaren Anzeigeinhaltes über die Minimap]
+{UC: Verschieben des sichtbaren Anzeigeinhaltes über die Minimap}
+
+Der Benutzer kann mittels der Minimap (siehe auch \ref{GUI Minimap})
+den sichtbaren Anzeigeinhalt scrollen.
+
+
+ \begin{precond}
+
+    \cond Es gibt mindestens ein geöffnetes Anzeigefenster.
+
+  \end{precond}
+
+  \begin{postsuccess}
+    \cond 
+    Der sichtbare Anzeigeinhalt ist auf den Bereich des
+    Anzeigefensters gesetzt, der dem Punkt welcher auf der
+    Minimap angeklickt wurde, entspricht.
+
+  \end{postsuccess}
+
+  
+  \begin{proc}    
+
+    \step[1]
+    Der Benutzer klickt mit der linken Maustaste auf einen
+    Punkt auf der Minimap.
+
+    \step[2]
+    GIANT zentriert den sichtbaren Anzeigeinhalt des Anzeigefensters 
+    auf den vorgegebenen Punkt.
+    
+  \end{proc}
+
+
+\end{uc}

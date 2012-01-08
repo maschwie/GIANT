@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+  <document>
+
+	<properties>
+	  <title>Contact</title>
+	</properties>
+
+	<body>
+
+	  <section name="Contact">
+
+        <p>
+          You can either contact the developers individually or post
+          to the <a
+          href="mailto:giant-devel@lists.berlios.de">mailing
+          list</a>. Plese note that we might not respond quickly since
+          the project is maintainance state.
+        </p>
+
+	  </section>
+  
+	</body>
+  </document>
+  

@@ -1,0 +1,41 @@
+// GSL-expression iterate_find_system
+//
+// First Author: Steffen Keul
+//
+// $Id: iterate_find_system.gsl,v 1.1 2003-09-24 00:03:08 keulsn Exp $
+//
+// Expression to demonstrate implementation of
+// efficient iteration over large sets.
+//
+// Iterates over all nodes in the graph. Creates a
+// subgraph "System" containing all nodes that are
+// an instance of the iml node-class "System".
+//
+
+[
+  set (+target, empty_node_set ());
+
+  // build new activation environment. This makes
+  // it possible to have 'nodes' destroyed before
+  // the subgraph is created --> wastes less memory.
+  { ()
+    [
+      set (+nodes, all_nodes ());
+      loop
+       ({ ()
+          [
+            set (+n, get_first ('nodes));
+            sub ('nodes, n);
+            if
+             (instance_of (n, "System"),
+              { () add ('target, n)},
+              null);
+            less (0, size_of ('nodes));
+          ]
+        });
+    ]
+  } ();
+
+  set ('subgraph.System, (target, empty_edge_set ()));
+]
+

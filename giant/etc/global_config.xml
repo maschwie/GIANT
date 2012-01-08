@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE giant_config_file 
+  SYSTEM "giant_config_file.dtd">
+
+<giant_config_file>
+
+  <!-- <absolute_path_root root_directory  = "resources_dir" /> -->
+  			
+  <!-- Required Config Settings -->  
+  
+  <setting name="Resources_Directory" value="../shared" />
+  
+  <setting name="Icon_For_Node_Annotations" value="../shared/icons/document.xpm" />
+  
+  <setting name="Current_Selection_Highlight_Color" value="#AAAAAA" />
+					  
+  <setting name="Selection_Highlight_Color_1" value="#FF0000" />
+  <setting name="Selection_Highlight_Color_2" value="#00FF00"/>
+  <setting name="Selection_Highlight_Color_3" value="#0000FF" />
+					  
+  <setting name="IML_Subgraph_Highlight_Color_1" value="#00FFFF" />
+  <setting name="IML_Subgraph_Highlight_Color_2" value="#FF00FF" />
+  <setting name="IML_Subgraph_Highlight_Color_3" value="#FFFF00" />
+
+  <setting name="Editor.Source" value="/usr/bin/emacs +%l %f" />
+  <!-- This setting only works for emacs 21 -->
+  <!-- <setting name="Editor.Source" value="/usr/bin/emacs +%l:%c %f" /> -->
+
+  <setting name="GSL.Include_Path" value="../shared/gsl" />
+
+  <!-- Settings for scripts in menus -->
+  <setting name="GSL.No_Param" value="Open Entire Graph:Open HPG:Search For Routine:Create Complete Subgraph" />
+  <setting name="GSL.No_Param_Context" value="" />
+  <setting name="GSL.Node_Id_Param" value="Get Adjacent Nodes:Get Statements:Trace Function Call" />
+  <setting name="GSL.Edge_Id_Param" value="" />
+  <setting name="GSL.Subgraph_Param" value="To Window" />
+  <setting name="GSL.Selection_Param" value="Get Successors" />
+
+</giant_config_file>

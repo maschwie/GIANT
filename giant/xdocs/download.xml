@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+
+  <document>
+
+	<properties>
+	  <title>Overview</title>
+	</properties>
+
+	<body>
+
+	  <section name="Overview">
+
+        <p>
+          The project goal is the development of a fast browsing tool
+          for large graphs with enhanced analysis features like multiple
+          selections and a fully integrated scripting language.
+        </p>
+
+        <p>
+          The development team is 6 persons, all students of the
+          University of Stuttgart, Germany. The project is part of our
+          studies in Software Engineering.
+        </p>
+
+	  </section>
+  
+	</body>
+  </document>
+  

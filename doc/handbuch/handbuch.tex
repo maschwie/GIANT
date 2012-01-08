@@ -1,0 +1,217 @@
+% ==============================================================================
+%  $RCSfile: handbuch.tex,v $, $Revision: 1.18 $
+%  $Date: 2003-09-23 19:33:38 $
+%  $Author: birdy $
+%
+%  Description: Master Datei des Handbuchs
+%
+%  Last-Ispelled-Revision:
+%
+% ==============================================================================
+
+\documentclass[a4paper,titlepage,11pt,german,twoside]{scrbook}
+
+\clearpage
+\makeatletter
+
+%koma uses \chapter*, but we want to use \chapter
+%  changed srcbook.cls-commands
+\renewcommand\idx@heading{%
+  \twocolumn
+  \chapter{\indexname}\@mkboth{\indexname}{\indexname}
+}
+
+%Nummerierung soll net so eng aneinanderhaengen
+\renewcommand*\l@section{\@dottedtocline{1}{1.5em}{3em}}
+
+\makeatother
+
+
+\usepackage{../styles/common}
+
+\usepackage{verbatim}
+\usepackage{shortvrb}
+
+\usepackage{handbuch}
+
+\usepackage{makeidx}
+\makeindex
+
+% subsubsections nummerieren
+\setcounter{secnumdepth}{3}
+
+\newcommand\version{Version 1.3\xspace}
+%\newcommand\version{\today\xspace}
+
+% header
+\fancyhead{}
+\fancyhead[LE,RO]{\slshape \company}
+\fancyhead[LO,RE]{\slshape \leftmark}
+\fancyfoot[LE,RO]{\thepage{}}
+\fancyfoot[LO,RE]{\version}
+
+\begin{document}
+
+% title page
+\thispagestyle{empty}
+\hfill
+\parbox{5.5cm}
+{Universität Stuttgart\\
+Studienprojekt A -- IML Browser\\
+\company}
+
+\vspace{3cm}
+
+\begin{center}
+  \Huge
+  \textsf{Handbuch}\\
+  \vspace{.5cm}
+  {\Large\version}\\
+  \vspace{3cm}
+  \includegraphics[scale=.5]{../logo}
+\end{center}
+\newpage
+
+\MakeShortVerb{\°}
+
+\input{history}
+
+%===============================================================================
+%
+% Inhaltsverzeichnis
+%
+\newpage
+\setcounter{tocdepth}{1}
+\tableofcontents
+
+%===============================================================================
+%
+% Einleitung
+%
+\chapter{Einleitung}
+\input{intro}
+
+%===============================================================================
+%
+% Produktübersicht
+%
+\chapter{Produktübersicht}
+
+In diesem Kapitel werden einige grundlegende Konzepte und
+Möglichkeiten von GIANT vorgestellt und kurz beschrieben.
+
+\input{product}
+
+%===============================================================================
+% 
+% Technische Produktumgebung
+%
+\chapter{Technische Produktumgebung}
+
+Hier wird die zum Betrieb von GIANT nötige Hardware 
+und die nötige Software sowie die Installation von GIANT
+auf Linux-Systemen beschrieben.
+
+\input{technical}
+
+
+%===============================================================================
+%
+% Konzepte und Begriffe
+%
+\chapter{Konzepte und Begriffe}
+
+Dieses Kapitel führt die für das Verständnis dieses Handbuches und die
+Benutzung von GIANT wichtigen Begriffe ein.
+Eine tabellarische Beschreibung der einzelnen Begriffe findet sich
+in der Spezifikation von GIANT, Kapitel Begriffslexikon.
+
+\input{konzepteundbegriffe}
+
+%===============================================================================
+% 
+% Tutorial
+%
+\chapter{Tutorial}
+\label{Tutorial}
+
+Dieses Kapitel beschreibt einige häufig vorkommende Analysen mit GIANT
+und wie sie vom Benutzer ausgeführt werden können, um dem Benutzer einen
+schnellen Start der Arbeit mit GIANT zu ermöglichen.\\
+Eine genauere Beschreibung der Funktionen befindet sich in Kapitel \ref{Beschreibung der Funktionen}.
+
+\input{tutorial}
+
+%===============================================================================
+% 
+% Beschreibung der Funktionen
+%
+\chapter{Beschreibung der Benutzeroberfläche}
+\label{Beschreibung der Funktionen}
+
+Dieses Kapitel beschreibt, geordnet nach den in GIANT auftretenden Fenstertypen,
+alle Buttons, Menüs und Funktionen. Dies ist als Nachschlagewerk über
+alle Elemente der graphischen Benutzeroberfläche (GUI) gedacht.
+
+\input{functions}
+
+
+%===============================================================================
+% 
+% Anfragesprache
+%
+\chapter{GIANT Scripting Language}
+\label {GIANT Scripting Language}
+
+% 
+% Moin Olly - Ich hab das Kapitel nach doc/handbuch/gsl.tex verschoben.
+% Da kannst Du nun aaaaaaaaaaaaaaaaaalle Fragen beantworten! :-) -- Phil
+%
+
+\input{gsl}
+
+%===============================================================================
+% 
+% Projektverwaltung
+%
+\chapter{GIANT Projektverwaltung}
+\label{GIANT Projektverwaltung}
+
+In diesem Kapitel wird beschrieben, wie persistente Arbeitsergebnisse
+von GIANT strukturiert und gespeichert werden.
+Arbeitsergebnisse sind z.B. vom Benutzer erzeugte Anzeigefenster
+mit als Fenster-Knoten visualisierten IML-Knoten eines IML-Graphen.
+Soweit für das Verständnis von GIANT nötig, sind auch Interna des
+Programms festgehalten.
+
+\input{project}
+
+%===============================================================================
+% 
+% Beschreibung aller Konfigurationsdateien
+%
+\chapter{Konfiguration von GIANT}
+\label{Konfiguration von GIANT}
+
+Hier wird beschrieben, wie benutzerdefinierbare Einstellungen von
+GIANT gespeichert und verwaltet werden. In diesem Kapitel wird 
+insbesondere beschrieben, welche Einstellungen der Benutzer
+in welchen Konfigurationsdateien vornehmen kann.
+
+\input{config}
+
+
+%==============================================================================
+%
+%  Index
+%
+\printindex
+
+%==============================================================================
+% 
+% Anhang
+%
+\newpage
+\appendix
+
+\end{document}

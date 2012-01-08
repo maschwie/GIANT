@@ -1,0 +1,37 @@
+{
+  (+node)
+  [
+    run ("standard");
+    if
+      (has_attribute (node, "Statements"),
+      { ()
+        [
+          set (+nodes, empty_node_set ());
+          set (+edges, get_outgoing (node));
+          set (+statement, get_attribute (node, "Statements"));
+          add ('edges, get_outgoing (statement));
+          set (+items, get_attribute (statement, "Items"));
+          add ('nodes, statement);
+          set (+i, 1);
+          set (+size, size_of (items));
+
+          while
+            (
+            { ()
+              [
+                not (less (size, i));
+              ]
+            },
+            { ()
+              [
+                add ('nodes, get_entry (items, i));
+                get_entry (items, 1);
+                set ('i, add (i, 1));
+              ]
+            });
+          set ('selection.Statements, (nodes, edges));
+        ]
+      },
+      null);
+  ]
+}

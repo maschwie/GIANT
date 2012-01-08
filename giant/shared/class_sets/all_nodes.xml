@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE giant_class_set_file 
+  SYSTEM "giant_class_set_file.dtd">
+
+<giant_class_set_file>
+
+  <associated_node_classes>
+    <super_node_class super_node_class_name = "IML_Root" />
+  </associated_node_classes>
+  
+  <associated_edge_classes>
+  </associated_edge_classes>
+
+</giant_class_set_file>

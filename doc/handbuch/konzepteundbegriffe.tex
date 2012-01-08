@@ -1,0 +1,397 @@
+% ==============================================================================
+%  $RCSfile: konzepteundbegriffe.tex,v $, $Revision: 1.9 $
+%  $Date: 2003-09-23 19:33:38 $
+%  $Author: birdy $
+%
+%  Description:
+%
+%  Last-Ispelled-Revision:
+%
+% ==============================================================================
+
+\section{Begriffe}
+\index{Begriffe}
+
+\index{GSL-Anfrage}
+\index{Query}
+
+Eine GSL-Anfrage (Query) beschreibt einen Vorgang, bei dem
+über geeignete Kriterien IML-Knoten und IML-Kanten aus dem IML-Graphen
+oder aus IML-Teilgraphen ausgewählt werden.
+GIANT greift über eine Schnittstelle, das Reflection Model von Bauhaus
+Reengineering, auf den IML-Graphen zu.\\
+
+Die Visualisierung des Graphen erfolgt in Anzeigefenstern.
+\index{Teilgraphen}
+Mit GIANT können Teilmengen des IML-Graphen gebildet werden, diese
+heißen IML-Teilgraphen.
+
+\index{Fenster-Knoten}
+\index{Fenster-Kanten}
+
+\index{IML-Kanten}
+\index{IML-Knoten}
+
+In dieser Anleitung weden für Knoten und Kanten des Graphen die Begriffe
+Fenster-Knoten und Fenster-Kante verwendet, wenn diese in einem Anzeigefenster
+sichtbar sind, oder allgemein IML-Knoten bzw. IML-Kante.
+Die Namen Graph-Knoten und Graph-Kante werden verwendet, wenn Knoten bzw.
+Kante Bestandteil eines IML-Teilgraphen sind.
+    
+\index{Kantenklasse}
+\index{Edge Class}
+
+Der Begriff Kantenklasse (Edge Class) bezeichnet die Einteilung der
+IML-Kanten des IML-Graphen in verschiedene Klassen, wie sie sich aus der
+IML-Graph-Bibliothek von Bauhaus ergibt.\\
+
+Die Zuordnung einer IML-Kante zu einer Kantenklasse wird durch die Knotenklasse
+des Start-Knotens und den Namen des Attributes (aus dem Bauhaus-IML-Graphen),
+welches die IML-Kante beschreibt, festgelegt. Jede vorkommende Kombination aus
+der Knoten-Klasse eines Start-Knotens und dem Namen eines Attributes,
+welches eine Kante beschreibt, ist somit eine eigene Kantenklasse.\\
+
+\index{Knotenklasse}
+\index{Node Class}
+
+Eine Knotenklasse (Node Class) ergibt sich aus der Einteilung der IML-Knoten
+des IML-Graphen in verschiedene Klassen, wie sie sich aus der
+IML-Graph-Bibliothek von Bauhaus ergibt.\\
+
+\index{Klassenmenge}
+\index{Class Set}
+
+\label{Klassenmenge}
+Eine Klassenmenge (Class Set) ist eine durch IML-Dateien festgelegte
+Zusammenfassung von Kantenklassen und Knotenklassen.
+Es kann mehrere Klassenmengen geben. Die selben Knotenklassen und 
+Kantenklassen können gleichzeitig zu mehreren Klassenmengen gehören.\\
+Der Aufbau dieser Klasenmengendateien ist in Kapitel \ref{Config-Klassenmengen}
+beschrieben.
+
+\index{Annotation}
+
+Eine Knoten-Annotationen (Node Annotation ist eine eine textuelle
+Beschreibung zu einem bestimmten Knoten des IML-Graphen, die der Nutzer
+hinzufügen kann.\\
+\index{Layout} 
+
+Die zweidimensionale räumliche Anordnung von
+Fenster-Knoten und Fenster-Kanten innerhalb eines Anzeigefensters
+auf dem sogenannten Anzeigeinhalt wird Layout genannt.\\
+  
+Eine Auswahl von Fenster-Knoten und Fenster-Kanten 
+eines visualisierten Teilgraphen des IML-Graphen innerhalb eines
+Anzeigefensters. heißt Selektion (Selection).\\
+  
+Selektieren (to select) beschreibt einen Vorgang über den der Benutzer, z.B.
+durch Anklicken von Fenster-Knoten oder Fenster-Kanten mit der Maus,
+eine Selektion aufbaut.
+  
+
+\index{Zoom}
+  
+Der Nutzer kann in GIANT-Anzeigefenster zoomen, d.h. die Zoomstufe
+(Zoom Level) jedes Fensters verändern.  Dieser Faktor beschreibt die Größe des
+sichtbaren Anzeigeinhaltes.  Bei einer sehr niedrigen Zoomstufe
+(auch: weit weg gezoomt) ist ein größerer Teil des im
+Anzeigefenster visualisierten IML-Graphen sichtbar als bei einer
+hohen Zoomstufe (auch: sehr nach heran gezoomt).\\
+  
+Hervorheben von Knoten bedeutet, dass in einem
+Anzeigefenster visualisierte Fenster-Knoten oder Fenster-Kanten
+z.B. durch eine farbige Umrahmung von anderen Fenster-Knoten oder
+Fenster-Kanten unterscheidbar gemacht werden.\\
+    
+\section{Bezeichnertypen} \label{afa Bezeichnertypen} \index{Bezeichner!erlaubte}
+  Folgende Zeichen bzw. Zeichenfolgen werden von GIANT als gültige Bezeichner, z.B. als
+  Namen für Fenster, akzeptiert:
+
+    \begin {enumerate}
+  
+      \item
+      Die lateinischen Groß- und Kleinbuchstaben; nicht zulässig sind
+      Umlaute und das Zeichen ''"s''. Zulässig sind also nur die 
+      ASCII-Zeichen 65 bis 90 und 97 bis 122 (gemäß Spezifikation
+      der ISO-8859-Zeichensätze).
+   
+      \item
+      Die Ziffern ''0'' bis ''9'' (ASCII-Zeichen 48 bis 57)
+    
+      \item
+      Das Zeichen ''\_'' (ASCII-Zeichen 95).
+     
+    \end {enumerate}
+
+\section {Allgemeine Bedienkonzepte} \index{Bedienkonzepte}
+Hier werden grundlegende Konzepte der Bedienung von GIANT beschrieben.
+
+ 
+
+  \subsection{Standard-Selektion}
+  \label{Standard-Selektion}
+  \index{Standard-Selektion}
+ 
+  Jedes Anzeigefenster hat genau eine Standard-Selektion. Diese
+  Selektion wird bei der Erzeugung des Fensters angelegt und ist zu
+  Anfang leer. Die Standard-Selektion kann nicht gelöscht
+  werden. Abgesehen davon verhält sich die Standard-Selektion wie vom
+  Benutzer angelegte Selektionen.
+    
+  \subsection {Aktuelle Selektion} 
+               \label{Aktuelle Selektion vs Selektionen}
+
+  \index{Aktuelle Selektion}
+               
+    Es gibt zu jedem Anzeigefenster beliebig viele Selektionen
+    (mindestens aber eine -- die Standard-Selektion),
+    davon ist immer eine die aktuelle Selektion.\\
+    
+
+    Selektieren mittels der linken Maustaste 
+    und weiterer Funktionstasten (siehe 
+    \ref{Selektieren von Fenster-Knoten und Fenster-Kanten in Anzeigefenstern}) 
+    betrifft immer nur die aktuelle Selektion. \\
+    Alle anderen Selektionen können zwar hervorgehoben werden, aber nicht 
+    durch das Selektieren mittels linker Maustaste etc. geändert werden.\\
+      
+    Der Benutzer kann jederzeit mittels Kontextmenü bestimmen, welche der
+    Selektionen eines Anzeigefensters die aktuelle Selektion ist.\\
+    
+    Die aktuelle Selektion wird immer hervorgehoben. 
+
+  \index{Selektieren}
+  
+   \subsection {Selektieren von Fenster-Knoten und Fenster-Kanten in 
+               Anzeigefenstern}
+  \label {Selektieren von Fenster-Knoten und Fenster-Kanten in 
+               Anzeigefenstern} 
+  
+  Hier wird beschrieben, wie man mittels der Maus und Tastatur einzelne
+  Fenster-Knoten und Fenster-Kanten selektiert und deselektiert:\\
+
+  Die so erzielte Auswahl bezieht sich immer auf die aktuelle
+  Selektion (siehe Selektionsauswahlliste im Fenster, Abschnitt
+  \ref{Selektionsauswahlliste}).\\
+  Änderungen der Selektionen sind auch in der Selektionsauswahlliste im
+  Fenster sichtbar.\\
+   
+  Allgemein gilt: Selektiert werden kann mit der Maus durch Klick
+  mit der linken Maustaste oder Aufziehen eines Rahmens mittels der
+  gedrückten linken Maustaste.
+    
+  \index{Selektieren mit der Maus}  
+    
+  Falls während des Selektierens mit der Maus (beide Methoden) die Shift-Taste
+  auf der Tastatur gedrückt gehalten wird, so werden die markierten
+  Knoten und Kanten der bisherigen Selektion hinzugefügt, bzw. entfernt, wenn diese
+  schon hinzugefügt waren.
+  Wird während des Aufziehens eines Rahmens mit der linken Maustaste
+  die Control-Taste auf der Tastatur niedergedrückt gehalten, so
+  werden alle Knoten und Kanten innerhalb des Rahmens hinzugefügt, egal,
+  ob diese schon markiert waren.
+    
+  \begin{enumerate}
+
+   \item Alle selektierten Fenster-Knoten und Fenster-Kanten deselektieren.\\
+   Wird mit der linken Maustaste auf einen Punkt des sichtbaren Anzeigeinhaltes
+   geklickt, unter dem sich keine Fenster-Knoten bzw. Fenster-Kanten befinden,
+   so werden alle bis dahin selektierten Fenster-Knoten und Fenster-Kanten
+   deselektiert.
+  
+   \item Selektieren durch Anklicken mit linker Maustaste.\\
+   Nur der angeklickte Fenster-Knoten oder die angeklickte Fenster-Kante 
+   wird selektiert. 
+   Andere bis dahin selektierte Fenster-Knoten und Fenster-Kanten 
+   werden deselektiert.
+   
+   \item Selektieren durch Anklicken mittels Shift + linke Maustaste.\\
+   Falls noch nicht selektiert wird der angeklickte Fenster-Knoten oder die
+   angeklickte Fenster-Kante zu der aktuellen Selektion hinzugefügt.
+   Falls bereits selektiert, wird der Fenster-Knoten oder die Fenster-Kante 
+   aus der aktuellen Selektion entfernt.
+   
+   \index{Rahmen}
+   \item Selektieren durch Aufziehen eines Rahmens mittels gedrückter 
+   linker Maustaste.\\
+   Alle Fenster-Knoten und Fenster-Kanten innerhalb des Rahmens werden 
+   selektiert, alle Fenster-Knoten und Fenster-Kanten außerhalb des 
+   Rahmens werden deselektiert.
+   
+   \item Selektieren durch Aufziehen eines Rahmens mittels 
+   Shift + gedrückte linke Maustaste.\\
+   Alle Fenster-Knoten und Kanten innerhalb des Rahmens, 
+   die noch nicht selektiert sind, werden der aktuellen Selektion 
+   hinzugefügt.\\
+   Alle Fenster-Knoten und Kanten innerhalb des Rahmens, 
+   die bereits selektiert
+   sind, werden aus der aktuellen Selektion entfernt.
+
+   \item Selektieren durch Aufziehen eines Rahmens mittels 
+   Control + gedrückte linke Maustaste.\\
+   Alle Fenster-Knoten und Fenster-Kanten innerhalb des Rahmens, 
+   die noch nicht selektiert sind, werden der aktuellen Selektion 
+   hinzugefügt. Fenster-Knoten und Kanten innerhalb und außerhalb 
+   des Rahmens, die bereits selektiert sind, bleiben selektiert.
+  
+  \end{enumerate}
+
+
+  
+\section {Verhalten beim Einfügen von IML-Teilgraphen und Selektionen
+in Anzeigefenster}
+  \label{Verhalten beim Einfügen von IML-Teilgraphen und Selektionen
+         in Anzeigefenster}
+
+  \index{IML-Teilgraphen!Einfügen in Anzeigefenster}
+  \index{Selektionen!Einfügen in Anzeigefenster}
+  
+  In diesem Abschnitt wir der Einfügevorgang von IML-Teilgraphen und
+  Selektionen in Anzeigefenster spezifiziert.
+
+   \subsection {Vorgabe der Zielposition} \index{Zielposition}
+     \label{Vorgabe der Zielposition}
+   Für bestimmte Funktionen muss der Benutzer manuell Zielpositionen
+   innerhalb eines zu bestimmenden Anzeigefensters auswählen. An dieser
+   Zielposition werden dann z.B. neue Fenster-Knoten eingefügt. Ablauf:\\
+   
+     Der Benutzer wählt das entsprechende Anzeigefenster aus
+     (dadurch dass er ihm je nach Betriebssystemkonvention den
+     Fokus gibt). Hierbei können nur bereits geöffnete Anzeigefenster
+     des Projektes ausgewählt werden.\\
+     
+%**     Befindet sich die Maus über dem Bereich des Anzeigefensters, wo
+%**     der IML-Graph visualisiert wird, so wird anstatt des
+%**     Mauszeigers ein Fadenkreuz (siehe auch \ref{Fadenkreuzcursor}) angezeigt.\\
+     
+     Durch Klicken mit der linken Maustaste wird dann die
+     Zielposition vorgegeben.
+    
+   \subsection{Einfügen von Selektionen in Anzeigefenster}
+      \label{Einfügen von Selektionen in Anzeigefenster}
+
+   \index{Selektionen!Einfügen in Anzeigefenster}
+
+   Das grundlegende Verhalten beim Einfügen von Selektionen
+   in Anzeigefenster (Kopieren einer Selektion aus einem Anzeigefenster
+   in ein anderes) ist wie folgt:
+   
+     Die Position von Fenster-Knoten der einzufügenden Selektion, 
+     die bereits in dem Anzeigefenster visualisiert sind,
+     bleibt, falls nicht an entsprechender Stelle anders
+     spezifiziert, unverändert.\\
+     
+     Fenster-Kanten der Selektion werden nur eingefügt, 
+     falls ihr Start- und ihr Zielknoten
+     ebenfalls Bestandteil der Selektion sind oder bereits im Anzeigefenster
+     visualisiert sind. 
+     
+  
+   \subsection{Einfügen von IML-Teilgraphen in Anzeigefenster}
+     \label{Einfügen von IML-Teilgraphen in Anzeigefenster}
+   \index{IML-Teilgraphen!Einfügen in Anzeigefenster}
+
+   Beim Einfügen von IML-Teilgraphen in Anzeigefenster beschrieben verhält
+   sich GIANT wie folgt:\\
+   
+     Das Layout für den IML-Teilgraphen wird vor dem Einfügen gemäß eines
+     vom Benutzer vorgegebenen Layoutalgorithmus berechnet.\\
+     
+     Die Graph-Knoten und Graph-Kanten des IML-Teilgraphen werden dann
+     analog zu  \ref{Einfügen von Selektionen in Anzeigefenster} 
+     als Fenster-Knoten und Fenster-Kanten in das Anzeigefenster eingefügt.\\
+  
+% ==============================================================================  
+\section {Verhalten bei Umwandeln von Selektionen und IML-Teilgraphen}
+  \label{Verhalten bei Umwandeln von Selektionen und IML-Teilgraphen}
+
+  \index{Umwandeln von Selektionen und IML-Teilgraphen}
+
+
+  Dieser Abschnitt beschreibt grundlegende Konventionen für die
+  Umwandlung von IML-Teilgraphen in Selektionen und umgekehrt.
+
+
+  \subsection {Selektion aus IML-Teilgraphen ableiten}
+    \label{Selektion aus IML-Teilgraphen ableiten}
+
+  \index{Selektionen!Ableiten aus IML-Teilgraphen}
+
+    Beim Ableiten von Selektionen aus IML-Teilgraphen gilt folgendes:\\
+    
+    Der IML-Teilgraph bleibt unverändert. Im zu bestimmenden Anzeigefenster
+    wird eine neue Selektion erzeugt, die alle Graph-Knoten und Graph-Kanten
+    des IML-Teilgraphen umfasst, welche bereits
+    als Fenster-Knoten und Fenster-Kanten im Anzeigefenster vorhanden sind.\\
+    
+    Knoten und Kanten des IML-Teilgraphen, die nicht als Fenster-Knoten und
+    Fenster-Kanten im entsprechenden Anzeigefenster vorhanden sind, werden
+    ignoriert.
+  
+    
+  \subsection {IML-Teilgraph aus Selektion ableiten}
+    \label{IML-Teilgraphen aus Selektion ableiten}
+
+   \index{IML-Teilgraphen!Ableiten aus Selektionen}
+
+
+    Beim Ableiten von IML-Teilgraphen aus Selektionen bleibt die Selektion unverändert.\\
+    
+    Es wird ein neuer IML-Teilgraph erzeugt. Dieser umfasst alle Knoten 
+    und Kanten der Selektion, welche einen gültigen Teilgraphen bilden.
+    Kanten der Selektion, deren Start- und Zielknoten nicht ebenfalls
+    Bestandteil der Selektion sind, werden ignoriert.
+ 
+
+\section {Verhalten beim Entfernen von Fenster-Knoten und Fenster-Kanten}
+  \label{Verhalten beim Entfernen von Fenster-Knoten und Fenster-Kanten}
+
+  \index{Fenster-Knoten!entfernen}
+  \index{Fenster-Kanten!entfernen}
+
+  
+  Beim Entfernen von Fenster-Knoten und Fenster-Kanten aus einem
+  Anzeigefenster werden nur die graphischen Repräsentationen der IML-Knoten und
+  IML-Kanten des Bauhaus-IML-Graphen in dem betroffenen Anzeigefenster 
+  gelöscht.
+  Graph-Knoten und Graph-Kanten von IML-Teilgraphen bleiben davon unberührt.
+ 
+  \subsection {Entfernen aller Knoten und Kanten einer Selektion}
+    \label {Entfernen aller Knoten und Kanten einer Selektionen}
+
+    \index{Selektionen!Entfernen von Knoten und Kanten}
+
+  Beim Entfernen aller Fenster-Knoten und Fenster-Kanten einer Selektion
+  gelten die folgenden Konventionen:
+  
+    Alle Fenster-Knoten und Fenster-Kanten der Selektion werden aus dem
+    Anzeigefenster entfernt.\\
+    
+    Fenster-Kanten im Anzeigefenster, deren Start- oder Zielknoten
+    entfernt wird, werden ebenfalls entfernt (auch wenn sie nicht
+    zur entsprechenden Selektion gehören).\\
+          
+    Andere Selektionen des Anzeigefensters werden entsprechend aktualisiert, 
+    die betroffenen Fenster-Knoten und Fenster-Kanten werden auch aus 
+    diesen Selektionen entfernt.
+
+\section {Auseinanderschieben von Fenster-Knoten}
+  \label {Auseinanderschieben von Fenster-Knoten}
+
+  \index{Fenster-Knoten!auseinanderschieben}
+  \index{auseinanderschieben}
+  
+Sollen Fenster-Knoten auf dem Anzeigeinhalt
+auseinandergeschoben werden, so geschieht dies wie hier beschrieben
+und dürfte schneller von der Hand gehen als das manuelle
+Auseinanderschieben durch Verschieben jedes einzelnen Knotens.
+GIANT stellt diese Funktionalität dem Benutzer über eine
+Funktion zur manuellen Ausführung zur Verfügung, siehe Abschnitt
+\ref{Empty Vis Pane Right click}, \gq{Make Room}. Ein automatisches 
+\gq{Auseinanderschieben von Fenster-Knoten} durch GIANT selbst ist
+nicht vorgesehen.\\
+
+Die Fenster-Knoten werden immer entlang einer Strecke von diesem 
+Punkt durch den jeweiligen Fenster-Knoten verschoben.
+Jeder Fenster-Knoten wird um einen konstanten Betrag (kann vom Benutzer 
+eingegeben werden) von dem Punkt weggeschoben.

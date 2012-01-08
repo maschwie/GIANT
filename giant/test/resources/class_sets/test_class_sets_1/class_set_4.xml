@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE giant_class_set_file 
+  SYSTEM "giant_class_set_file.dtd">
+
+<giant_class_set_file>
+
+  <!-- All node classes being a member of the class set -->
+  <associated_node_classes>
+  
+    <node_class node_class_name="T_Node" />
+    <node_class node_class_name="O_Node" />
+
+
+  </associated_node_classes>
+  
+  <!-- All edge classes being a member of the class set -->
+  <associated_edge_classes>
+ 
+    <edge_class start_node_class="O_Node" attribute_name="*" />	
+    <edge_class start_node_class="*" attribute_name="Its_Type" />	    
+    <edge_class start_node_class="T_Node" attribute_name="Parent" />	
+
+  </associated_edge_classes>
+ 
+
+</giant_class_set_file>
+

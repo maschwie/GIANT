@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE giant_vis_style_file
+  SYSTEM "giant_vis_style_file.dtd">
+
+<giant_vis_style_file>
+
+  <!-- ................................................................. -->
+  <global_settings
+    vis_window_background_color="RGB:20/20/20"/> 
+
+  <!-- ................................................................. -->
+  <default_node_setting
+    icon         = "test_node_icon_default_1.xpm"
+    text_color   = "RGB:AA/AA/AA"
+    border_color = "RGB:AA/AA/AA"
+    fill_color   = "white"> 
+     
+    <node_attribute attribute_name = "SLoc"/>      
+  </default_node_setting>         
+      
+  <!-- ................................................................. -->
+  <default_edge_setting
+    line_color = "green"     
+    text_color = "green"     
+    line_style = "continuous_line"      
+    show_label = "yes" />  
+      
+</giant_vis_style_file>

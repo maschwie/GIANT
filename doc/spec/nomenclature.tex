@@ -1,0 +1,120 @@
+% ==============================================================================
+%  $RCSfile: nomenclature.tex,v $, $Revision: 1.20 $
+%  $Date: 2003-04-21 01:13:30 $
+%  $Author: schwiemn $
+%
+%  Description: Begriffslexikon
+%
+%  Last-Ispelled-Revision: 1.14
+%
+% ==============================================================================
+
+\begin{nomenclature}
+  
+  \term{Anfrage}{Query}{Eine Anfrage beschreibt einen Vorgang, bei dem
+    über geeignete Kriterien IML-Konten und IML-Kanten aus dem IML-Graphen
+    oder aus IML-Teilgraphen ausgewählt werden.}
+  
+  \term{Anzeigefenster}{Visualization Window}{Ein Fenster in dem ein
+    Teilgraph des IML-Graphen nach bestimmten Kriterien visualisiert
+    ist. Jedem Anzeigefenster ist ein Anzeigeinhalt zugeordnet.}
+  
+  \term{Anzeigeinhalt}{Window Content}{ Eine \gq{virtuelle} Oberfläche
+    auf der die Objekte des visualisierten Teilgraphen (also
+    Fenster-Knoten und Fenster-Kanten) angeordnet sind, d.h. räumliche
+    Layoutinformation zu allen Objekten des entsprechenden
+    Anzeigefensters. Abhängig von der Zoomstufe ist jeweils nur ein
+    bestimmter Teil des Anzeigeinhaltes sichtbar - der sichtbare
+    Anzeigeinhalt.  Die Größe des Anzeigeinhaltes ist theoretisch
+    unbegrenzt.}
+  
+  \term{Fenster-Kante}{Window Edge}{Die graphische Repräsentation einer
+    IML-Kante innerhalb eines Anzeigefensters.}
+  
+  \term{Fenster-Knoten}{Window Node}{Die graphische Repräsentation
+    eines IML-Knoten innerhalb eines Anzeigefensters.}
+  
+  \term{Graph-Kante}{Graph Edge}{Eine Kante des IML-Graphen welche
+    Bestandteil eines IML-Teilgraphen ist.}
+  
+  \term{Graph-Knoten}{Graph Node}{Ein Knoten des IML-Graphen welcher
+    Bestandteil eines IML-Teilgraphen ist.}
+  
+  \term{IML-Graph}{IML Graph}{Der IML-Graph, wie er von der Bauhaus
+    Reengineering GmbH gestellt wird.  Auf diesen Graphen wird über
+    das sogenannte Reflection Model zugegriffen.}
+  
+  \term{IML-Kante}{IML Edge}{Eine Kante des IML-Graphen.}
+  
+  \term{IML-Knoten}{IML Node}{Ein Knoten des IML-Graphen.}
+  
+  \term{IML-Teilgraph}{IML Subgraph}{Eine Menge über Knoten und Kanten
+    des IML-Graphen, die so gestaltet ist, dass sie einen Teilgraphen
+    des IML-Graphen darstellt.}
+  
+  \term{Kantenklasse}{Edge Class}{Die Einteilung der IML-Kanten des
+    IML-Graphen in verschiedene Klassen, wie sie sich aus der
+    IML-Graph-Bibliothek von Bauhaus ergibt.\\
+    Innerhalb dieser Spezifikation ist der Begriff Kantenklasse so
+    zu verstehen, dass jede IML-Kante eindeutig zu genau einer Kantenklasse
+    gehört, eine Vererbungshierarchie existiert nicht. Die Zuordnung
+    einer IML-Kante zu einer Kantenklasse wird durch die Knotenklasse
+    des Start-Knotens und den Namen des Attributes
+    (aus dem Bauhaus-IML-Graphen), welches die IML-Kante
+    beschreibt, festgelegt. Jede vorkommende Kombination aus der
+    Knoten-Klasse eines Start-Knotens und dem Namen eines Attributes,
+    welches eine Kante beschreibt, ist somit eine eigene Kantenklasse}
+
+  \term{Klassenmenge}{Class Set}{Eine durch die IML-Graph Bibliothek
+    vorgegebene Zusammenfassung von Kantenklassen und Knotenklassen.
+    Es kann mehrere Klassenmengen geben. Die selben Knotenklassen und 
+    Kantenklassen können gleichzeitig zu mehreren Klassenmengen gehören.}
+
+  \term{Knoten-Annotationen}{Node Annotation}{Eine textuelle
+    Beschreibung zu einem bestimmten Knoten des IML-Graphen.}
+  
+  \term{Knotenklasse}{Node Class}{Die Einteilung der IML-Knoten des
+    IML-Graphen in verschiedene Klassen, wie sie sich aus der
+    IML-Graph-Bibliothek von Bauhaus ergibt.\\
+    Im Sinne der Verwendung dieses Begriffes innerhalb dieser Spezifikation
+    liegt den Knotenklassen keine Vererbungshierarchie zu Grunde, jeder
+    IML-Knoten gehört also eindeutig zu genau einer Knotenklasse}
+  
+  \term{Layout}{Layout}{Die zweidimensionale räumliche Anordnung von
+    Fenster-Knoten und Fenster-Kanten innerhalb eines Anzeigefensters
+    auf dem sogenannten Anzeigeinhalt.}
+ 
+  \term{Reflektion}{Reflection Model}{Die Schnittstelle zum Zugriff
+    auf den IML-Graphen.}
+  
+  \term{Schleife}{Loop}{Eine Kante mit identischem Start- und Zielknoten.
+    Wird oft auch als Selbstkante bezeichnet.}
+  
+  \term{Selektion}{Selection}{Eine Auswahl von Fenster-Knoten und Fenster-Kanten 
+    eines visualisierten Teilgraphen des IML-Graphen innerhalb eines
+    Anzeigefensters.}
+  
+  \term{Sichtbarer Anzeigeinhalt}{Visible Window Content}{ Der Bereich
+    des Anzeigeinhaltes eines Anzeigefensters, der zur Zeit sichtbar
+    dargestellt wird.}
+  
+  \term{Zoomstufe}{Zoom Level}{ Dieser Faktor beschreibt die Größe des
+    sichtbaren Anzeigeinhaltes.  Bei einer sehr niedrigen Zoomstufe
+    (auch: weit weg gezoomt) ist ein größerer Teil des im
+    Anzeigefenster visualisierten IML-Graphen sichtbar als bei einer
+    hohen Zoomstufe (auch: sehr nach heran gezoomt).}
+  
+  \term{hervorheben}{to highlight}{Hervorheben bedeutet, dass in einem
+    Anzeigefenster visualisierte Fenster-Knoten oder Fenster-Kanten
+    z.B.\ durch eine farbige Umrahmung von anderen Fenster-Knoten oder
+    Fenster-Kanten unterscheidbar gemacht werden.}
+    
+  \term{selektieren}{to select}{Selektieren beschreibt einen Vorgang
+    über den der Benutzer, z.B.\ durch Anklicken von Fenster-Knoten
+    oder Fenster-Kanten mit der Maus, eine Selektion aufbaut.}
+
+\end{nomenclature}
+
+%%% Local Variables: 
+%%% TeX-master: "spec"
+%%% End: 

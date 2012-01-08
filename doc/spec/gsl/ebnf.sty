@@ -1,0 +1,27 @@
+% Taken from a style sheet by
+% Damian Cugley <Damian.Cugley@prg.oxford.ac.uk> Wed 11 Jul 1990
+% modified by sk
+
+\RequirePackage{xspace}
+ 
+\begingroup \catcode`\|=13
+    \gdef\EBNF
+    {\list{???}%
+      {%
+	\catcode`\|=13 \def|{$\mid$}%
+	\def\makelabel##1{##1 ::=}%
+	\parsep=0pt \itemsep=\smallskipamount
+	\leftmargin=\parindent \advance\leftmargin+1.5cm
+	\labelsep=0.5em \labelwidth=1.5em
+	\raggedright
+      }%
+    }
+\endgroup
+ 
+\let\endEBNF\endlist
+ 
+%\def\<#1>{\textsf{#1}}
+\newcommand\nonterminal[2]{\newcommand{#1}{\textsf{#2}\xspace}}
+\newcommand\token[2]{\newcommand{#1}{\textbf{#2}\xspace}}
+\endinput
+------------------------------------------------------------------------

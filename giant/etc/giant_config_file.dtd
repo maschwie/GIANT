@@ -1,0 +1,16 @@
+<!ELEMENT giant_config_file (absolute_path_root?, (setting)*)>
+
+  <!-- If not defined relative paths will be expanded towards
+       the directory there the config file is loacted.
+  -->
+  <!ELEMENT absolute_path_root EMPTY>
+  <!ATTLIST absolute_path_root
+    root_directory  CDATA #REQUIRED
+  >
+
+  <!ELEMENT setting EMPTY>
+  <!ATTLIST setting
+    name   CDATA #REQUIRED
+    value  CDATA #REQUIRED
+  >
+    

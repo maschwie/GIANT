@@ -1,0 +1,525 @@
+% ==============================================================================
+%  $RCSfile: afa.tex,v $, $Revision: 1.23 $
+%  $Date: 2003-04-21 01:13:30 $
+%  $Author: schwiemn $
+%
+%  Description: Beschreibung allgemeiner funktionaler Anforderungen - UseCase
+%               übergreifend.
+%
+%  Last-Ispelled-Revision: 1.10
+%
+% ==============================================================================
+
+
+\section{Fehlerverhalten} \index{Fehlerverhalten}
+\label{afa Fehlerverhalten}
+
+Beim Auftreten von Fehlern während des Betriebs von GIANT werden
+die folgenden Konventionen eingehalten. GIANT verhält sich bezüglich der 
+Fehlerbehandlung konsistent. Das im Folgenden beschriebene Fehlerverhalten gilt 
+daher für das gesamte System. Abweichungen von diesem Verhalten werden gegebenenfalls 
+an der entsprechenden Stelle explizit spezifiziert.
+
+\begin {enumerate}
+  \item
+  Fehlermeldungen \index{Fehlermeldungen} werden grundsätzlich über
+  einen allgemeinen Fehlerdialog ausgegeben 
+  (siehe auch \ref {GUI Ausgabe von Fehlermeldungen}). 
+  Ist dies nicht möglich, wird die Fehlermeldung
+  über die Kommandozeile ausgegeben.
+
+  \item
+  Sollten mehrere Fehler, wie z.B. Eingabefehler, gleichzeitig auftreten,
+  so werden die entsprechenden Fehlermeldungen falls möglich 
+  über einen einzigen allgemeinen Fehlerdialog \gq{auf einen Schlag}
+  an den Benutzer ausgegeben.
+   
+
+\end{enumerate}
+
+  \subsection {Ungültige oder unvollständige Eingaben bei Dialogen} 
+  \index{Fehlerverhalten!Eingabefehler in Dialogen}
+
+  \begin {enumerate}
+    \item
+    Eingaben innerhalb von Dialogen werden immer dann geprüft, 
+    wenn der Benutzer
+    alle Eingaben in dem Dialogfenster durch Klicken auf einen
+    \gq{OK-Button} bestätigt.
+
+    \item
+    Stellt das System dann eine unzulässige oder fehlende Eingabe fest, so
+    erscheint der allgemeine Fehlerdialog mit einem Hinweis, welche Daten
+    falsch eingegeben wurden bzw.\ fehlen.
+   
+    \item
+    Nach Schließen des Fehlerdialoges kehrt das System zu der Stelle, die
+    im Ablauf unmittelbar vor der Fehlerüberprüfung lag, zurück. Also
+    typischerweise zu dem Dialog, in dem die fehlerhafte Eingabe getätigt 
+    wurde. Die zuvor in den jeweiligen Dialogen getätigten Eingaben des 
+    Benutzers bleiben erhalten.
+    
+  \end {enumerate}
+
+  \subsection {Ungültige oder unvollständige Eingaben bei Kommandozeilenaufruf}
+  \index{Fehlerverhalten!Kommandozeilenaufruf}
+  Gibt der Benutzer beim Start von GIANT über Kommandozeile ungültige oder unvollständige
+  Eingabendaten (z.B. für die Kommandozeilenparameter) an, so wird der
+  Start von GIANT abgebrochen. Auf der Kommandozeile wird dann eine entsprechende 
+  Fehlermeldung mit Nennung der fehlenden oder ungültigen Daten ausgegeben.
+
+  \subsection {Fehler beim Einlesen von Dateien}
+  \index{Fehlerverhalten!Einlesen von Dateien}  
+
+  \begin{enumerate}
+    \item Können zum Betrieb von GIANT nötige Dateien (wie z.B. die
+          Konfigurationsdateien) nicht an der 
+          dafür vorgesehenen Position gefunden werden, so wird das 
+          System mit einer entsprechenden Fehlermeldung beendet.
+          In dieser Fehlermeldung werden die nicht gefundenen Dateien
+          und der Pfad, an dem diese eigentlich zu finden sein müssten, 
+          angegeben.
+          
+    \item Das Verhalten bei allen anderen möglichen Fehlern, die im Zusammenhang
+          mit dem Zugriff auf Dateien auftreten können (fehlende Zugriffsrechte, 
+          defekte Sektoren etc.), ist undefiniert.
+
+  \end{enumerate} 
+
+
+  \subsection {Einlesen unzulässiger Daten aus Dateien}
+  \index{Einlesen von Daten}
+
+  \begin {enumerate}
+  
+    \item
+    GIANT verfügt über keine Mechanismen, die speziell darauf
+    ausgelegt sind, die Korrektheit von Daten, die aus Dateien gelesen werden,
+    zu prüfen.
+    
+    \item
+    Stellt das System dennoch fest, dass eine einzulesende Datei ungültige 
+    Daten enthält, so wird das System mit einer entsprechenden Fehlermeldung
+    beendet.
+  \end {enumerate}
+
+
+
+\section {Grundlegendes Feedbackverhalten} \index{Feedbackverhalten}
+
+Während der Berechnung durch Layoutalgorithmen und Anfragen 
+informiert GIANT den Benutzer laufend, dass es gerade mit Berechnungen 
+beschäftigt ist. Dies kann über eine der beiden 
+hier beschriebenen Möglichkeiten geschehen:
+
+   \begin {enumerate}
+   
+     \item 
+     Anzeige eines Dialoges mit einem sich ständig leicht ändernden
+     Inhalt, so dass erkennbar ist, dass das System noch läuft.
+     
+     \item \index{Progressbar}
+     Anzeige eines Progressbars, der über den aktuellen Fortschritt
+     einer Berechnung informiert, ohne dabei den Gesamtaufwand zu 
+     kennen. Dieser Progressbar protokolliert also nur die
+     bisher geleistete Arbeit (z.B. die Anzahl der Knoten, welche
+     bereits layoutet wurden; siehe hierzu auch \ref{GUI-Fortschrittsanzeige}).
+     
+   \end {enumerate}
+
+
+   
+\section {Zulässige Eingaben} \index{Eingaben!zulässige}
+Hier wird beschrieben, welche Eingaben für Namen etc. innerhalb
+von GIANT (z.B. bei den entsprechenden Texteingabedialogen) zulässig sind.
+Unzulässige Namen werden generell abgelehnt und führen zu einer Fehlermeldung.
+
+
+ \subsection{Bezeichnertypen} \label{afa Bezeichnertypen}
+ Hier werden Bezeichnertypen, also von GIANT als zulässig akzeptierte
+ Folgen von Ziffern, Buchstaben und Sonderzeichen definiert.
+
+
+    \subsubsection {Der String \gq{STANDARD NAME}}
+    \label{afa Standard Name} 
+    Hier wird ein String spezifiziert, der nur die im Folgenden 
+    beschriebenen Zeichen enthalten darf.
+    Zulässige Zeichen sind:
+    \begin {enumerate}
+  
+      \item
+      Die lateinischen Groß- und Kleinbuchstaben; nicht zulässig sind
+      Umlaute und das Zeichen ''"s''. Zulässig sind also nur die 
+      ASCII-Zeichen 65 bis 90 und 97 bis 122 (gemäß Spezifikation
+      der ISO-8859-Zeichensätze).
+   
+      \item
+      Die Ziffern ''0'' bis ''9'' (ASCII-Zeichen 48 bis 57)
+    
+      \item
+      Das Zeichen ''\_'' (ASCII-Zeichen 95).
+     
+    \end {enumerate}
+
+
+  \subsection {Zulässige Namen} \label{afa Zulaessige Namen}
+  Für  Namen, die der Benutzer z.B. für Projekte vergeben darf, 
+  wird hier der jeweils zulässige Bezeichnertyp
+  (siehe \ref{afa Bezeichnertypen}) spezifiziert.
+
+  \begin {enumerate}
+  
+    \item Name eines Projektes: STANDARD NAME
+          \index{Projekte!zulässige Namen}
+    
+    \item Name eines IML-Teilgraphen: STANDARD NAME\\
+          Dieser Name muss für jeden IML-Teilgraphen innerhalb eines
+          Projektes eindeutig sein.
+          \index{IML-Teilgraphen!zulässige Namen}
+    
+    \item Name eines Anzeigefensters: STANDARD NAME\\
+          Dieser Name muss für jedes Anzeigefenster innerhalb des Projektes
+          eindeutig sein.         
+          \index{Anzeigefenster!zulässige Namen}
+    
+    \item Name einer Selektion: STANDARD NAME \\
+          Dieser Name muss für jede Selektion 
+          innerhalb eines Anzeigefensters eindeutig sein.
+          \index{Selektionen!zulässige Namen}
+    
+    \item Name eines Pins: STANDARD NAME \\
+          Dieser Name muss für jeden Pin
+          innerhalb eines Anzeigefensters eindeutig sein.
+          \index{Pins!zulässige Namen}
+ 
+  \end {enumerate}
+ 
+  
+\section {Allgemeine Bedienkonzepte} \index{Bedienkonzepte}
+Hier werden grundlegende Konzepte der Bedienung von GIANT beschrieben.
+
+  \subsection {Selektieren von Fenster-Knoten und Fenster-Kanten in 
+               Anzeigefenstern}
+  \label {Selektieren von Fenster-Knoten und Fenster-Kanten in 
+               Anzeigefenstern} 
+
+  \index{Selektieren}
+  
+  Hier werden die Abläufe zur Selektion und Deselektion einzelner
+  Fenster-Knoten und Fenster-Kanten spezifiziert.
+    
+  \begin{enumerate}
+
+   \item Alle selektierten Fenster-Knoten und Fenster-Kanten deselektieren.\\
+   Wird mit der linken Maustaste auf einen Punkt des sichtbaren Anzeigeinhaltes
+   geklickt, unter dem sich keine Fenster-Knoten bzw. Fenster-Kanten befinden,
+   so werden alle bis dahin selektierten Fenster-Knoten und Fenster-Kanten
+   deselektiert.
+  
+   \item Selektieren durch Anklicken mit linker Maustaste.\\
+   Nur der angeklickte Fenster-Knoten oder die angeklickte Fenster-Kante 
+   wird selektiert. 
+   Andere bis dahin selektierte Fenster-Knoten und Fenster-Kanten 
+   werden deselektiert.
+   
+   \item Selektieren durch Anklicken mittels Shift + linke Maustaste.\\
+   Falls noch nicht selektiert wird der angeklickte Fenster-Knoten oder die
+   angeklickte Fenster-Kante zu der aktuellen Selektion hinzugefügt.
+   Falls bereits selektiert wird der Fenster-Knoten oder die Fenster-Kante 
+   aus der aktuellen Selektion entfernt.
+   
+   \index{Rahmen}
+   \item Selektieren durch Aufziehen eines Rahmens mittels gedrückter 
+   linker Maustaste.\\
+   Alle Fenster-Knoten und Fenster-Kanten innerhalb des Rahmens werden 
+   selektiert, alle Fenster-Knoten und Fenster-Kanten außerhalb des 
+   Rahmens werden deselektiert.
+   
+   \item Selektieren durch Aufziehen eines Rahmens mittels 
+   Shift + gedrückte linke Maustaste.\\
+   Alle Fenster-Knoten und Kanten innerhalb des Rahmens, 
+   die noch nicht selektiert sind, werden der aktuellen Selektion 
+   hinzugefügt.\\
+   Alle Fenster-Knoten und Kanten innerhalb des Rahmens, 
+   die bereits selektiert
+   sind, werden aus der aktuellen Selektion entfernt.
+
+   \item Selektieren durch Aufziehen eines Rahmens mittels 
+   Control + gedrückte linke Maustaste.\\
+   Alle Fenster-Knoten und Fenster-Kanten innerhalb des Rahmens, 
+   die noch nicht selektiert sind, werden der aktuellen Selektion 
+   hinzugefügt. Fenster-Knoten und Kanten innerhalb und außerhalb 
+   des Rahmens, die bereits selektiert sind, bleiben selektiert.
+   
+  
+  \end{enumerate}
+  
+  \subsection{Standard-Selektion}
+  \label{Standard-Selektion}
+  \index{Standard-Selektion}
+ 
+  Jedes Anzeigefenster hat genau eine Standard-Selektion. Diese
+  Selektion wird bei der Erzeugung des Fensters angelegt und ist zu
+  Anfang leer. Die Standard-Selektion kann nicht gelöscht
+  werden. Abgesehen davon verhält sich die Standard-Selektion wie vom
+  Benutzer angelegte Selektionen.
+    
+  \subsection {Aktuelle Selektion} 
+               \label{Aktuelle Selektion vs Selektionen}
+
+  \index{Aktuelle Selektion}
+               
+  \begin{enumerate}
+  
+  \item Es gibt zu jedem Anzeigefenster beliebig viele Selektionen
+    (mindestens aber eine -- die Standard-Selektion),
+    davon ist immer eine die aktuelle Selektion.
+    
+    \item 
+    Das oben beschriebene Selektieren mittels der linken Maustaste 
+    und weiterer Funktionstasten (siehe 
+    \ref{Selektieren von Fenster-Knoten und Fenster-Kanten in Anzeigefenstern}) 
+    betrifft immer nur die aktuelle Selektion. \\
+    Alle anderen Selektionen können zwar hervorgehoben werden, aber nicht 
+    durch das Selektieren mittels linker Maustaste etc. geändert werden.
+      
+    \item
+    Der Benutzer kann jederzeit bestimmen, welche der Selektionen eines
+    Anzeigefensters die aktuelle Selektion ist (siehe UseCase 
+    \ref {Selektion zur aktuellen Selektion machen}).
+    
+    \item 
+    Die aktuelle Selektion wird immer hervorgehoben (siehe hierzu auch   
+    \ref{Hervorheben von Selektionen und der aktuelle Selektion}). 
+  
+  \end {enumerate}
+  
+  
+  
+\section {Verhalten beim Einfügen von IML-Teilgraphen und Selektionen
+in Anzeigefenster}
+  \label{Verhalten beim Einfügen von IML-Teilgraphen und Selektionen
+         in Anzeigefenster}
+
+  \index{IML-Teilgraphen!Einfügen in Anzeigefenster}
+  \index{Selektionen!Einfügen in Anzeigefenster}
+  
+  In diesem Abschnitt wir der Einfügevorgang von IML-Teilgraphen und
+  Selektionen in Anzeigefenster spezifiziert.
+
+   \subsection {Vorgabe der Zielposition} \index{Zielposition}
+     \label{Vorgabe der Zielposition}
+   Für bestimmte UseCases (siehe z.B.\ UseCase 
+   \ref{IML-Teilgraph in Anzeigefenster einfügen})
+   muss der Benutzer manuell Zielpositionen innerhalb eines 
+   zu bestimmenden Anzeigefensters auswählen. An dieser
+   Zielposition werden dann z.B. neue Fenster-Knoten eingefügt. Ablauf:
+   
+   \begin {enumerate}
+   
+     \item
+     Der Benutzer wählt das entsprechende Anzeigefenster aus
+     (dadurch dass er ihm je nach Betriebssystemkonvention den
+     Fokus gibt). Hierbei können nur bereits geöffnete Anzeigefenster
+     des Projektes ausgewählt werden.
+     
+     \item
+     Befindet sich die Maus über dem Bereich des Anzeigefensters, wo
+     der IML-Graph visualisiert wird, so wird anstatt des
+     Mauszeigers ein Fadenkreuz (siehe auch \ref{Fadenkreuzcursor}) angezeigt.
+     
+     \item
+     Durch Klicken mit der linken Maustaste wird dann über das Fadenkreuz die
+     Zielposition vorgegeben.
+     
+   \end{enumerate}
+   
+   
+   \subsection {Automatisches Erzeugen neuer Selektionen im Zielfenster}
+   Sämtliche Fenster-Knoten und Fenster-Kanten, die in einem Schritt in
+   ein Anzeigefenster eingefügt werden, werden dort automatisch
+   zur Standard-Selektion, der alte Inhalt der Standard-Selektion geht 
+   dabei verloren und die Standard-Selektion bekommt den Status der 
+   aktuellen Selektion.
+    
+   \subsection{Einfügen von Selektionen in Anzeigefenster}
+      \label{Einfügen von Selektionen in Anzeigefenster}
+
+   \index{Selektionen!Einfügen in Anzeigefenster}
+
+   Hier wird das grundlegende Verhalten beim Einfügen von Selektionen
+   in Anzeigefenster (Kopieren einer Selektion aus einem Anzeigefenster
+   in ein anderes) beschrieben.
+   
+   \begin{enumerate}
+   
+     \item
+     Das Layout der Selektion wird beim Einfügen in ein Anzeigefenster
+     übernommen.
+     
+     \item
+     Die Position von Fenster-Knoten der einzufügenden Selektion, 
+     die bereits in dem Anzeigefenster visualisiert sind,
+     bleibt, falls nicht an entsprechender Stelle anders
+     spezifiziert, unverändert.
+     
+     \item
+     Fenster-Kanten der Selektion werden nur eingefügt, 
+     falls ihr Start- und ihr Zielknoten
+     ebenfalls Bestandteil der Selektion sind oder bereits im Anzeigefenster
+     visualisiert sind. 
+     
+     \item
+     Die neu eingefügte Selektion ist in dem entsprechenden 
+     Anzeigefenster (dort wo sie eingefügt wurde) als Standard-Selektion 
+     vorhanden, der alte Inhalt der Standard-Selektion wird überschrieben.
+   
+   \end{enumerate}
+     
+  
+   \subsection{Einfügen von IML-Teilgraphen in Anzeigefenster}
+     \label{Einfügen von IML-Teilgraphen in Anzeigefenster}
+   \index{IML-Teilgraphen!Einfügen in Anzeigefenster}
+
+   Hier wird das grundlegende Verhalten des Systems 
+   beim Einfügen von IML-Teilgraphen in Anzeigefenster beschrieben.
+   
+   \begin{enumerate}
+   
+     \item
+     Das Layout für den IML-Teilgraphen wird vor dem Einfügen gemäß eines
+     vom Benutzer vorgegebenen Layoutalgorithmus berechnet.
+     
+     \item
+     Die Graph-Knoten und Graph-Kanten des IML-Teilgraphen werden dann
+     analog zu  \ref{Einfügen von Selektionen in Anzeigefenster} 
+     als Fenster-Knoten und Fenster-Kanten in das Anzeigefenster eingefügt
+       
+   \end{enumerate} 
+  
+  
+% ==============================================================================  
+\section {Verhalten bei Umwandeln von Selektionen und IML-Teilgraphen}
+  \label{Verhalten bei Umwandeln von Selektionen und IML-Teilgraphen}
+
+  \index{Umwandeln von Selektionen und IML-Teilgraphen}
+
+
+  Dieser Abschnitt beschreibt grundlegende Konventionen für die
+  Umwandlung von IML-Teilgraphen in Selektionen und umgekehrt.
+
+
+  \subsection {Selektion aus IML-Teilgraphen ableiten}
+    \label{Selektion aus IML-Teilgraphen ableiten}
+
+  \index{Selektionen!Ableiten aus IML-Teilgraphen}
+
+  \begin {enumerate}
+  
+    \item
+    Der IML-Teilgraph bleibt unverändert.
+  
+    \item
+    Im zu bestimmenden Anzeigefenster wird eine neue Selektion erzeugt,
+    die alle Graph-Knoten und Graph-Kanten des IML-Teilgraphen umfasst, 
+    welche bereits
+    als Fenster-Knoten und Fenster-Kanten im Anzeigefenster vorhanden sind.
+    
+    \item
+    Knoten und Kanten des IML-Teilgraphen, die nicht als Fenster-Knoten und
+    Fenster-Kanten im entsprechenden Anzeigefenster vorhanden sind, werden
+    ignoriert.
+ 
+  \end {enumerate}
+  
+    
+  \subsection {IML-Teilgraph aus Selektion ableiten}
+    \label{IML-Teilgraphen aus Selektion ableiten}
+
+   \index{IML-Teilgraphen!Ableiten aus Selektionen}
+
+  \begin {enumerate}
+  
+    \item
+    Die Selektion bleibt unverändert.
+    
+    \item
+    Es wird ein neuer IML-Teilgraph erzeugt. Dieser umfasst alle Knoten 
+    und Kanten der Selektion, welche einen gültigen Teilgraphen bilden.
+    Kanten der Selektion, deren Start- und Zielknoten nicht ebenfalls
+    Bestandteil der Selektion sind, werden ignoriert.
+ 
+  \end {enumerate}
+  
+
+\section {Verhalten beim Entfernen von Fenster-Knoten und Fenster-Kanten}
+  \label{Verhalten beim Entfernen von Fenster-Knoten und Fenster-Kanten}
+
+  \index{Fenster-Knoten!entfernen}
+  \index{Fenster-Kanten!entfernen}
+
+  
+  Beim Entfernen von Fenster-Knoten und Fenster-Kanten aus einem
+  Anzeigefenster werden nur die graphischen Repräsentationen der IML-Knoten und
+  IML-Kanten des Bauhaus-IML-Graphen in dem betroffenen Anzeigefenster 
+  gelöscht.
+  Graph-Knoten und Graph-Kanten von IML-Teilgraphen bleiben davon unberührt.
+ 
+  \subsection {Entfernen aller Knoten und Kanten einer Selektion}
+    \label {Entfernen aller Knoten und Kanten einer Selektionen}
+
+    \index{Selektionen!Entfernen von Knoten und Kanten}
+
+  Beim Entfernen aller Fenster-Knoten und Fenster-Kanten einer Selektion
+  gelten die folgenden Konventionen:
+  
+  \begin {enumerate}
+  
+    \item
+    Alle Fenster-Knoten und Fenster-Kanten der Selektion werden aus dem
+    Anzeigefenster entfernt.
+    
+    \item
+    Fenster-Kanten im Anzeigefenster, deren Start- oder Zielknoten
+    entfernt wird, werden ebenfalls entfernt (auch wenn sie nicht
+    zur entsprechenden Selektion gehören).
+            
+    \item 
+    Andere Selektionen des Anzeigefensters werden entsprechend aktualisiert, 
+    die betroffenen Fenster-Knoten und Fenster-Kanten werden auch aus 
+    diesen Selektionen entfernt.
+
+  \end{enumerate}
+
+
+
+\section {Auseinanderschieben von Fenster-Knoten}
+  \label {Auseinanderschieben von Fenster-Knoten}
+
+  \index{Fenster-Knoten!auseinanderschieben}
+  \index{auseinanderschieben}
+  
+Sollen Fenster-Knoten auf dem Anzeigeinhalt automatisch
+auseinandergeschoben werden, so geschieht dies nach dem hier beschriebenen
+Modus.
+GIANT stellt diese Funktionalität dem Benutzer über einen
+UseCase zur manuellen Ausführung zur Verfügung. Ein automatisches 
+\gq{Auseinanderschieben von Fenster-Knoten} durch GIANT selbst ist
+nicht vorgesehen, der Entwurf wird aber eine einfache Erweiterbarkeit
+von GIANT diesbezüglich unterstützen.
+
+\begin {enumerate}
+
+  \item
+  Es gibt einen fixen Punkt, von dem aus alle Fenster-Knoten weggeschoben
+  werden.
+  
+  \item 
+  Die Fenster-Knoten werden immer entlang einer Strecke von diesem 
+  Punkt durch den jeweiligen Fenster-Knoten verschoben.
+  
+  \item
+  Jeder Fenster-Knoten wird um einen konstanten Betrag (kann vom Benutzer 
+  eingegeben werden) von dem Punkt weggeschoben.
+ 
+\end {enumerate}

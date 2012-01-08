@@ -1,0 +1,22 @@
+<!ELEMENT giant_project_file (global_data, visualisation_windows, subgraphs)>
+
+  <!ELEMENT global_data EMPTY> 
+  <!ATTLIST global_data
+    iml_graph_file_path        CDATA  #REQUIRED
+    iml_graph_checksum         CDATA  #REQUIRED
+    node_annotations_file_name CDATA  #REQUIRED
+  >
+  
+  <!ELEMENT visualisation_windows (a_vis_window_file)*>
+  
+    <!ELEMENT a_vis_window_file EMPTY>
+    <!ATTLIST a_vis_window_file
+      file_path  CDATA  #REQUIRED
+    >
+	   
+  <!ELEMENT subgraphs (a_subgraph_file)*>
+  
+    <!ELEMENT a_subgraph_file EMPTY>
+    <!ATTLIST a_subgraph_file
+      file_path  CDATA  #REQUIRED
+    >  

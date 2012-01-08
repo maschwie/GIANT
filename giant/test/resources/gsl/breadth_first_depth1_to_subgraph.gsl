@@ -1,0 +1,30 @@
+[
+   run ("for_each");
+   set_current_window ("Entire_Graph_Window");
+   set (+nodes, get_entry (selection.Source, 1));
+   set (+edges, get_entry (selection.Source, 2));
+   set (+add_edge, { (+e) add ('edges, e) });
+
+   for_each
+     (nodes,
+      { (+n) 
+        [
+           for_each
+              (get_incoming (n),
+               add_edge);
+           for_each
+              (get_outgoing (n),
+               add_edge);
+        ]});
+
+   for_each
+     (edges,
+      { (+e)
+        [
+           add ('nodes, get_source (e));
+           add ('nodes, get_target (e));
+        ]});
+
+   set ('selection.Target, (nodes, edges));
+]
+

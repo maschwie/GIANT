@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!-- internal DTD - external DTD also possible -->
+<!DOCTYPE giant_visualisation_style_file [
+
+   <!ELEMENT giant_visualisation_style_file 
+       (global_settings,
+       default_node_setting, 
+       (node_class_specific_setting)*,
+       default_edge_setting,
+       (edge_class_specific_setting)*)>
+
+      <!-- ............................................................... -->
+      <!ELEMENT global_settings EMPTY>
+      <!ATTLIST global_settings 
+         vis_window_background_color CDATA #REQUIRED
+      >
+ 
+      <!-- ............................................................... -->
+      <!ELEMENT default_node_setting (node_attribute)*>
+      <!ATTLIST default_node_setting 
+         icon         CDATA #REQUIRED
+         text_color   CDATA #REQUIRED
+         border_color CDATA #REQUIRED
+         fill_color   CDATA #REQUIRED
+      >
+
+      <!ELEMENT node_class_specific_setting 
+         ((node_attribute)*, (node_class)*)>
+      <!ATTLIST node_class_specific_setting 
+         icon         CDATA #REQUIRED
+         text_color   CDATA #REQUIRED
+         border_color CDATA #REQUIRED
+         fill_color   CDATA #REQUIRED
+      >
+      
+         <!-- A list of attributes that should be shown inside the
+              visulisation window. -->
+         <!ELEMENT node_attribute EMPTY>
+         <!ATTLIST node_attribute 
+            attribute_name CDATA #REQUIRED
+         >
+
+         <!-- A node class that is affected by this setting. -->
+         <!ELEMENT node_class EMPTY>   
+         <!ATTLIST node_class
+             node_class_name CDATA #REQUIRED
+         >
+
+    <!-- ............................................................... -->
+    <!ELEMENT default_edge_setting EMPTY>
+    <!ATTLIST default_edge_setting
+       line_color CDATA                                     #REQUIRED
+       text_color CDATA                                     #REQUIRED 
+       line_style (continuous_line|dotted_line|dashed_line) #REQUIRED
+       show_label (yes|no)                                  #REQUIRED
+    >
+
+    <!ELEMENT edge_class_specific_setting (edge_class)*>
+    <!ATTLIST edge_class_specific_setting
+       line_color CDATA                                     #REQUIRED
+       text_color CDATA                                     #REQUIRED
+       line_style (continuous_line|dotted_line|dashed_line) #REQUIRED
+       show_label (yes|no)                                  #REQUIRED
+    > 
+ 
+         
+       <!-- A edge class that is affected by this setting -->
+       <!ELEMENT edge_class EMPTY>
+       <!ATTLIST edge_class
+          start_node_class CDATA #REQUIRED
+          attribute_name   CDATA #REQUIRED
+       >
+]>
+<giant_visualisation_style_file>
+
+   <!-- ................................................................. -->
+   <global_settings
+      vis_window_background_color="RBG:AA/AA/AA"/> 
+
+   <!-- ................................................................. -->
+
+   <default_node_setting
+      icon         = "./my_test_icon.xpm"
+      text_color   = "RGB:AA/AA/AA"
+      border_color = "RGB:AA/AA/AA"
+      fill_color   = "RGB:AA/AA/AA"> 
+
+      <node_attribute attribute_name = "Attribute_1" />
+      <node_attribute attribute_name = "Attribute_2" />    
+      <node_attribute attribute_name = "Attribute_3" />        
+      <node_attribute attribute_name = "Attribute_4" />   
+   </default_node_setting>
+
+   <node_class_specific_setting
+      icon         = "./my_test_icon.xpm"
+      text_color   = "RGB:AA/AA/AA"
+      border_color = "RGB:AA/AA/AA"
+      fill_color   = "RGB:AA/AA/AA">
+
+      <node_attribute attribute_name = "Attribute_1" />
+      <node_attribute attribute_name = "Attribute_2" />   
+
+      <!-- Only the following node classes are affected by the
+           settings inside the <node_class_specific_setting> node -->
+      <node_class node_class_name = "Dagobert Duck" />
+      <node_class node_class_name = "Daisy Duck" />   
+      <node_class node_class_name = "Gustav Gans" />   
+   </node_class_specific_setting> 
+
+   <!-- ................................................................. -->
+   <default_edge_setting
+      line_color = "RGB:AA/AA/AA"     
+      text_color = "RGB:AA/AA/AA"     
+      line_style = "dotted_line"
+      show_label = "yes" />  
+
+   <edge_class_specific_setting
+      line_color = "RGB:AA/AA/AA"     
+      text_color = "RGB:AA/AA/AA"     
+      line_style = "dotted_line"
+      show_label = "yes" >
+       
+      <!-- Edge classes that are affected by this setting -->
+      <edge_class
+         start_node_class = "Dagobert" attribute_name = "Anzahl Federn" />
+      <edge_class
+         start_node_class = "Daisy" attribute_name = "*" />
+      <edge_class
+         start_node_class = "*" attribute_name = "IQ Edge" />
+   </edge_class_specific_setting> 
+
+</giant_visualisation_style_file>

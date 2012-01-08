@@ -1,0 +1,23 @@
+{
+  ()
+  [
+    run ("nodes_with_type");
+    run ("nodes_with_attrib_value");
+    //set ('subgraph.OC, (nodes, empty_edge_set ()));
+    set (+name, input ("Enter routine name (regexp):"));
+    if
+      (equal (name, ""),
+       null,
+       { ()
+         [
+           set (+nodes, nodes_with_type ("OC_Routine"));
+           set
+             ('nodes,
+              nodes_with_attrib_value (nodes, "Mangled_Name", name));
+           set
+             ('subgraph.Routines,
+              (nodes, empty_edge_set ()));
+         ]
+       });
+  ]
+}

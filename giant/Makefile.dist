@@ -1,0 +1,53 @@
+#
+# GIANT Makefile
+#
+
+# gnatmake is called from this directory therefore all pathes need to
+# be relative to this directory or absolute
+OUT_PATH        = obj-$(shell uname -s)/
+
+AUNIT_PATH      = ../aunit-1.01
+GIANT_PATH      = ../giant
+IMLLIB_PATH     = ../iml_browser_030923
+XMLADA_PATH     = ../xmlada-0.7.1
+
+CFLAGS          = -O2 -finline-functions
+GNAT_FLAGS      = -gnatX -gnatn
+
+AUNIT_INCLUDES  = -I$(AUNIT_PATH)/aunit/framework -I$(AUNIT_PATH)/aunit/text_reporter
+IMLLIB_INCLUDES = -I$(IMLLIB_PATH)/IML.generated -I$(IMLLIB_PATH)/IML.src -I$(IMLLIB_PATH)/Reuse.src -I$(IMLLIB_PATH)/usr.local.reuse
+GIANT_INCLUDES  = -I$(GIANT_PATH)/src -I$(GIANT_PATH)/src/config -I$(GIANT_PATH)/src/control -I$(GIANT_PATH)/src/graph_lib -I$(GIANT_PATH)/src/gsl -I$(GIANT_PATH)/src/gsl/generated -I$(GIANT_PATH)/src/gui -I$(GIANT_PATH)/src/project -I$(GIANT_PATH)/src/reuse -I$(GIANT_PATH)/src/utils -I$(GIANT_PATH)/src/vis
+XMLADA_INCLUDES = -I$(XMLADA_PATH)/dom -I$(XMLADA_PATH)/input_sources -I$(XMLADA_PATH)/sax -I$(XMLADA_PATH)/unicode
+
+INCLUDES        = $(GIANT_INCLUDES) $(IMLLIB_INCLUDES) $(AUNIT_INCLUDES) $(XMLADA_INCLUDES) $(shell gtkada-config --cflags)
+
+LIBS            = -largs $(IMLLIB_LIBS) $(shell gtkada-config --libs)
+
+ALL_CFLAGS      = $(CFLAGS) $(TARGET_CFLAGS) $(GNAT_FLAGS) $(INCLUDES) $(CUSTOM_CFLAGS)
+ALL_LFLAGS      = $(LFLAGS) $(TARGET_LFLAGS) $(LIBS)
+
+MAIN = src/giant-main.adb
+EXEC = giant-$(shell uname -s)
+
+# dynamic linking (does not work, because we require a few modified bauhaus files)
+#ifeq ($(shell uname -s),SunOS)
+#  IMLLIB_INCLUDES += -I$(IMLLIB_PATH)/Reuse.obj -I$(IMLLIB_PATH)/IML.obj
+#  IMLLIB_LIBS = -L$(IMLLIB_PATH)/lib -lReuse -lIML
+#endif
+
+ifeq ($(shell test -r Makefile.local && echo "true"),true)
+  include Makefile.local
+endif
+
+.PHONY : all 
+
+all: 
+	mkdir -p $(OUT_PATH)
+	cd $(OUT_PATH) && \
+	gnatmake -m $(ALL_CFLAGS) $(GIANT_PATH)/$(MAIN) -o $(GIANT_PATH)/$(EXEC) $(GNATMAKE_FLAGS) $(ALL_LFLAGS) -bargs -static -E -largs 
+
+clean :
+	rm -rf $(OUT_PATH)/*
+
+tags :
+	find -name "*.ad[bs]" | xargs etags
