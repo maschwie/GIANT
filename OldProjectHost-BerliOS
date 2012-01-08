@@ -1,0 +1,37 @@
+The Project was originally hosted on BerliOS since 2003.
+http://en.wikipedia.org/wiki/BerliOS
+
+Due to the uncertain future of BerliOS we migrated the sources to the GitHub as of 6. January 2012
+                        
+----------------                        
+Old Project Page
+http://giant.berlios.de/                        
+                        
+----------------------------------------------
+Old Sources - deprecated since 6. January 2012
+
+http://developer.berlios.de/cvs/?group_id=991
+
+Anonymous CVS Access
+
+This project's BerliOS Developer CVS repository can be checked out through anonymous (pserver) CVS with the following instruction set. 
+The module you wish to check out must be specified as the modulename (modules are top level directories in the repository). 
+To see the list of the modules available in the repository use the web-based CVS repository access. 
+When prompted for a password for anonymous, simply press the Enter key.
+
+cvs -d:pserver:anonymous@cvs.berlios.de:/cvsroot/giant login
+cvs -z3 -d:pserver:anonymous@cvs.berlios.de:/cvsroot/giant co modulename
+
+Updates from within the module's directory do not need the -d parameter.
+
+Developer CVS Access via SSH
+
+Only project developers can access the CVS tree via this method. SSH2 must be installed on your client machine. 
+Substitute modulename and developername with the proper values. Enter your site password when prompted.
+
+export CVS_RSH=ssh
+cvs -z3 -ddevelopername@cvs.berlios.de:/cvsroot/giant co modulename
+
+CVS/SVN/HG/GIT Server Fingerprints for SSH
+
+    RSA Key: dd:a1:76:9d:cf:82:c4:3b:0d:24:b7:26:0e:36:6b:f1
